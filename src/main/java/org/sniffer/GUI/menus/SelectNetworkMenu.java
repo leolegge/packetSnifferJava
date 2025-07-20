@@ -1,8 +1,9 @@
-package org.sniffer.GUI;
+package org.sniffer.GUI.menus;
 
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.Pcaps;
+import org.sniffer.GUI.SnifferDashboard;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,7 @@ import java.util.List;
  * The class extends JMenu and initializes all possible networks to sniff into the frame
  *
  */
-public class selectNetworkMenu extends JMenu {
+public class SelectNetworkMenu extends JMenu {
 
     private SnifferDashboard dashboard;
     private ArrayList<JRadioButtonMenuItem> networkItems = new ArrayList<JRadioButtonMenuItem>();
@@ -23,12 +24,11 @@ public class selectNetworkMenu extends JMenu {
 
     /**
      *
-     * @param title The title of the menu
      * @param dashboard The reference to the main frame so different information can be displayed from this class
      * @throws PcapNativeException thrown when Pcap fails
      */
-    public selectNetworkMenu(String title, SnifferDashboard dashboard) throws PcapNativeException {
-        super(title);
+    public SelectNetworkMenu(SnifferDashboard dashboard) throws PcapNativeException {
+        super("Network");
         this.dashboard = dashboard;
 
         //Getting all possible networks
@@ -48,9 +48,6 @@ public class selectNetworkMenu extends JMenu {
             this.add(item);
         }
 
-
-        //Set the first one to be selected by default
-        networkItems.get(0).setSelected(true);
 
         //Adding listeners so different output is selected when different button is chosen
         for (JRadioButtonMenuItem item : networkItems) {

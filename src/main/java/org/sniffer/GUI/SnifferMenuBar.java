@@ -1,6 +1,9 @@
 package org.sniffer.GUI;
 
 import org.pcap4j.core.PcapNativeException;
+import org.sniffer.GUI.menus.EditMenu;
+import org.sniffer.GUI.menus.SelectNetworkMenu;
+import org.sniffer.GUI.menus.ViewMenu;
 
 import javax.swing.*;
 
@@ -8,8 +11,12 @@ import javax.swing.*;
  * This is the main menu bar class which extends the JMenuBar class this will contain all possible options
  * in the menu bar which is displayed at the top of the frame
  */
-public class snifferMenuBar extends JMenuBar {
-    private selectNetworkMenu networkMenu = new selectNetworkMenu("Network", this.dashboard);
+public class SnifferMenuBar extends JMenuBar {
+    private SelectNetworkMenu networkMenu = new SelectNetworkMenu(this.dashboard);
+    private EditMenu editMenu = new EditMenu();
+    private ViewMenu viewMenu = new ViewMenu();
+
+
     private SnifferDashboard dashboard;
 
     /**
@@ -18,9 +25,13 @@ public class snifferMenuBar extends JMenuBar {
      *                  changed in them
      * @throws PcapNativeException thrown when Pcap fails
      */
-    public snifferMenuBar(SnifferDashboard dashboard) throws PcapNativeException {
+    public SnifferMenuBar(SnifferDashboard dashboard) throws PcapNativeException {
         super();
+        //Adding menus to the menu bar
         this.add(networkMenu);
+        this.add(editMenu);
+        this.add(viewMenu);
+
         this.dashboard = dashboard;
     }
 

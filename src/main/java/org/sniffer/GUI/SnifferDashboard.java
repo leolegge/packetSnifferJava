@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class SnifferDashboard extends JFrame {
 
-    snifferMenuBar menuBar = new snifferMenuBar(this);
+    SnifferMenuBar menuBar = new SnifferMenuBar(this);
 
     public SnifferDashboard() throws PcapNativeException {
         this.setTitle("Sniffer");

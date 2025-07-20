@@ -9,25 +9,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws PcapNativeException, NotOpenException {
 
-
-        //this snippet finds all the possible network devices on the network
-
-        List<PcapNetworkInterface> nif = Pcaps.findAllDevs();
-
-        if (nif == null) {
-            System.out.println("No network interfaces found.");
-
-        }else{
-            for (PcapNetworkInterface ni : nif) {
-                System.out.println(ni);
-            }
-        }
-
-        /////////////////////////////////////////////////////
-
-        SnifferDashboard dahsboard = new SnifferDashboard();
-
-
+        SnifferDashboard dashboard = new SnifferDashboard();
 
     }
 }

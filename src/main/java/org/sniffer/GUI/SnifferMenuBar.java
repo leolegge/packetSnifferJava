@@ -12,12 +12,14 @@ import javax.swing.*;
  * in the menu bar which is displayed at the top of the frame
  */
 public class SnifferMenuBar extends JMenuBar {
-    private SelectNetworkMenu networkMenu = new SelectNetworkMenu(this.dashboard);
-    private EditMenu editMenu = new EditMenu();
-    private ViewMenu viewMenu = new ViewMenu(this.dashboard);
-
-
     private SnifferDashboard dashboard;
+
+    private SelectNetworkMenu networkMenu;
+    private EditMenu editMenu = new EditMenu();
+    private ViewMenu viewMenu;
+
+
+
 
     /**
      *
@@ -27,12 +29,17 @@ public class SnifferMenuBar extends JMenuBar {
      */
     public SnifferMenuBar(SnifferDashboard dashboard) throws PcapNativeException {
         super();
+        this.dashboard = dashboard;
+
+        networkMenu = new SelectNetworkMenu(this.dashboard);
+        viewMenu = new ViewMenu(this.dashboard);
+
         //Adding menus to the menu bar
         this.add(networkMenu);
         this.add(editMenu);
         this.add(viewMenu);
 
-        this.dashboard = dashboard;
+
     }
 
 }

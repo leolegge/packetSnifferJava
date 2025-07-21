@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class SnifferDashboard extends JFrame {
 
-    SnifferMenuBar menuBar = new SnifferMenuBar(this);
+    SnifferMenuBar menuBar;
     PacketQueryPanel packetQueryPanel = new PacketQueryPanel();
     PacketPanelsWrapper packetPanelsWrapper = new PacketPanelsWrapper();
 
@@ -28,6 +28,9 @@ public class SnifferDashboard extends JFrame {
 
         // Set fullscreen
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        //setting up menu bar
+        menuBar = new SnifferMenuBar(this);
 
         //Adding menu bar
         this.setJMenuBar(menuBar);

@@ -4,6 +4,8 @@ import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.packet.Packet;
 
+//TODO update this class to deal with more stuff
+
 public class PacketSniffer implements Runnable {
 
     PcapNetworkInterface networkInterface;

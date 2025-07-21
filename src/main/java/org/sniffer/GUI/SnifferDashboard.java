@@ -1,6 +1,7 @@
 package org.sniffer.GUI;
 
 import org.pcap4j.core.PcapNativeException;
+import org.pcap4j.core.PcapNetworkInterface;
 
 
 import javax.swing.*;
@@ -15,6 +16,10 @@ public class SnifferDashboard extends JFrame {
     SnifferMenuBar menuBar = new SnifferMenuBar(this);
     PacketQueryPanel packetQueryPanel = new PacketQueryPanel();
     PacketPanelsWrapper packetPanelsWrapper = new PacketPanelsWrapper();
+
+    private PcapNetworkInterface networkInterface = null;
+
+
 
     public SnifferDashboard() throws PcapNativeException {
         this.setTitle("Sniffer");
@@ -38,5 +43,19 @@ public class SnifferDashboard extends JFrame {
 
         this.setVisible(true);
     }
+
+    //getter
+    public PcapNetworkInterface getNetworkInterface() {
+        return networkInterface;
+    }
+
+
+    //setter
+    public void setNetworkInterface(PcapNetworkInterface networkInterface) {
+        this.networkInterface = networkInterface;
+    }
+
+
+
 
 }

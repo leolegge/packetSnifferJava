@@ -21,6 +21,7 @@ public class SelectNetworkMenu extends JMenu {
     private SnifferDashboard dashboard;
     private ArrayList<JRadioButtonMenuItem> networkItems = new ArrayList<JRadioButtonMenuItem>();
     private ButtonGroup networkGroup = new ButtonGroup();
+    private List<PcapNetworkInterface> nif = Pcaps.findAllDevs();
 
     /**
      *
@@ -32,7 +33,7 @@ public class SelectNetworkMenu extends JMenu {
         this.dashboard = dashboard;
 
         //Getting all possible networks
-        List<PcapNetworkInterface> nif = Pcaps.findAllDevs();
+
         if (nif == null) {
             System.out.println("No network interfaces found.");
 
@@ -54,10 +55,23 @@ public class SelectNetworkMenu extends JMenu {
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("Selected network item: " + item.getText());
+                    dashboard.setNetworkInterface(getNetworkInterface(item.getText()));
+                    System.out.println("Dashboard current network interface: " + dashboard.getNetworkInterface());
+
                 }
             });
         }
 
-
     }
+
+    public PcapNetworkInterface getNetworkInterface(String networkName) {
+        for(PcapNetworkInterface ni : nif) {
+            if (ni.getDescription().equals(networkName)) {
+                return ni;
+            }
+        }
+        return null;
+    }
+
+
 }

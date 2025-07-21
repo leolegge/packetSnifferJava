@@ -8,6 +8,7 @@ import java.awt.*;
 public class SnifferDashboard extends JFrame {
 
     SnifferMenuBar menuBar = new SnifferMenuBar(this);
+    PacketsDisplayPanel packetsDisplayPanel = new PacketsDisplayPanel();
 
     public SnifferDashboard() throws PcapNativeException {
         this.setTitle("Sniffer");
@@ -21,6 +22,10 @@ public class SnifferDashboard extends JFrame {
 
         //Adding menu bar
         this.setJMenuBar(menuBar);
+
+        //set layout of frame
+        this.setLayout(new BorderLayout());
+
         this.setVisible(true);
     }
 

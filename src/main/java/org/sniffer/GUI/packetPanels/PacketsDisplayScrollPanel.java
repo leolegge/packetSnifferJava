@@ -4,10 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PacketsDisplayScrollPanel extends JScrollPane {
-    private PacketsDisplayPanel packetsDisplayPanel = new PacketsDisplayPanel();
 
-    public PacketsDisplayScrollPanel() {
-        this.setBackground(Color.BLACK);
+
+    public PacketsDisplayScrollPanel(PacketsDisplayPanel packetsDisplayPanel) {
+        super(packetsDisplayPanel);
+
 
 
 

@@ -1,6 +1,7 @@
 package org.sniffer.GUI;
 
 import org.sniffer.GUI.packetPanels.PacketInformationPanel;
+import org.sniffer.GUI.packetPanels.PacketsDisplayPanel;
 import org.sniffer.GUI.packetPanels.PacketsDisplayScrollPanel;
 
 import javax.swing.*;
@@ -10,7 +11,8 @@ import javax.swing.*;
  *
  */
 public class PacketPanelsWrapper extends JPanel {
-    PacketsDisplayScrollPanel packetsDisplayScrollPanel = new PacketsDisplayScrollPanel();
+    PacketsDisplayScrollPanel packetsDisplayScrollPanel = new PacketsDisplayScrollPanel(
+            new PacketsDisplayPanel());
     PacketInformationPanel packetInformationPanel = new PacketInformationPanel();
 
     public PacketPanelsWrapper() {

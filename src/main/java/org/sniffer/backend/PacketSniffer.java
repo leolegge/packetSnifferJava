@@ -7,11 +7,13 @@ import org.pcap4j.packet.Packet;
 public class PacketSniffer implements Runnable {
 
     PcapNetworkInterface networkInterface;
+    PcapNetworkInterface.PromiscuousMode promiscuousMode;
     private boolean running = true;
 
 
-    public PacketSniffer(PcapNetworkInterface networkInterface) {
+    public PacketSniffer(PcapNetworkInterface networkInterface, PcapNetworkInterface.PromiscuousMode promiscuousMode) {
         this.networkInterface = networkInterface;
+        this.promiscuousMode = promiscuousMode;
     }
     @Override
     public void run() {
@@ -19,7 +21,7 @@ public class PacketSniffer implements Runnable {
         try {
             PcapHandle handle = networkInterface.openLive(
                     65536,                             // snaplen
-                    PcapNetworkInterface.PromiscuousMode.PROMISCUOUS,
+                    promiscuousMode,
                     10                                 // timeout in ms
             );
 

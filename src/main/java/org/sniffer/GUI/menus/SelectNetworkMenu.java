@@ -3,6 +3,7 @@ package org.sniffer.GUI.menus;
 import org.pcap4j.core.*;
 import org.pcap4j.packet.Packet;
 import org.sniffer.GUI.SnifferDashboard;
+import org.sniffer.backend.PacketSniffer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -58,24 +59,9 @@ public class SelectNetworkMenu extends JMenu {
                     dashboard.setNetworkInterface(getNetworkInterface(item.getText()));
                     System.out.println("Dashboard current network interface: " + dashboard.getNetworkInterface());
 
-                    /////////////////////////////////THIS IS A TEST NOT FINAL CODE WILL BE IN ANOTHER CLASS
-                    int snapLen = 65536; // max bytes per packet
-                    PcapNetworkInterface.PromiscuousMode mode = PcapNetworkInterface.PromiscuousMode.PROMISCUOUS;
-                    int timeout = 10; // ms
-                    try {
-                        PcapHandle handle = dashboard.getNetworkInterface().openLive(snapLen, mode, timeout);
-
-                        for (int i = 0; i < 10; i++) {
-                            Packet packet = handle.getNextPacketEx();
-                            System.out.println(packet);
-                        }
-                        handle.close();
-
-                    } catch (PcapNativeException | NotOpenException | EOFException | TimeoutException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-
-                    //////////////////////////////////////////////////////////
+                    PacketSniffer sniffer = new PacketSniffer(dashboard.getNetworkInterface());
+                    Thread snifferThread = new Thread(sniffer);
+                    snifferThread.start();
 
 
                 }

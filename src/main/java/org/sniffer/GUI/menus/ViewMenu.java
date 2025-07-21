@@ -1,5 +1,6 @@
 package org.sniffer.GUI.menus;
 
+import org.sniffer.GUI.ApplicationFrame;
 import org.sniffer.GUI.SnifferDashboard;
 
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class ViewMenu extends JMenu {
         applicationView.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-
+                ApplicationFrame applicationFrame = new ApplicationFrame(dashboard);
 
             }
         });

@@ -20,11 +20,9 @@ public class SnifferDashboard extends JFrame {
         this.setTitle("Sniffer");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Get the default screen device
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 
         // Set fullscreen
-        gd.setFullScreenWindow(this);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         //Adding menu bar
         this.setJMenuBar(menuBar);

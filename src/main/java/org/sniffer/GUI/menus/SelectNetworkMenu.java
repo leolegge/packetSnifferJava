@@ -1,15 +1,16 @@
 package org.sniffer.GUI.menus;
 
-import org.pcap4j.core.PcapNativeException;
-import org.pcap4j.core.PcapNetworkInterface;
-import org.pcap4j.core.Pcaps;
+import org.pcap4j.core.*;
+import org.pcap4j.packet.Packet;
 import org.sniffer.GUI.SnifferDashboard;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.EOFException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 /**
  * This is the menu for the network selection at the top of the program window
@@ -54,9 +55,28 @@ public class SelectNetworkMenu extends JMenu {
         for (JRadioButtonMenuItem item : networkItems) {
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Selected network item: " + item.getText());
                     dashboard.setNetworkInterface(getNetworkInterface(item.getText()));
                     System.out.println("Dashboard current network interface: " + dashboard.getNetworkInterface());
+
+                    /////////////////////////////////THIS IS A TEST NOT FINAL CODE WILL BE IN ANOTHER CLASS
+                    int snapLen = 65536; // max bytes per packet
+                    PcapNetworkInterface.PromiscuousMode mode = PcapNetworkInterface.PromiscuousMode.PROMISCUOUS;
+                    int timeout = 10; // ms
+                    try {
+                        PcapHandle handle = dashboard.getNetworkInterface().openLive(snapLen, mode, timeout);
+
+                        for (int i = 0; i < 10; i++) {
+                            Packet packet = handle.getNextPacketEx();
+                            System.out.println(packet);
+                        }
+                        handle.close();
+
+                    } catch (PcapNativeException | NotOpenException | EOFException | TimeoutException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+
+                    //////////////////////////////////////////////////////////
+
 
                 }
             });

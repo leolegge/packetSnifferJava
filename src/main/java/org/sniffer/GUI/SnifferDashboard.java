@@ -2,15 +2,15 @@ package org.sniffer.GUI;
 
 import org.pcap4j.core.PcapNativeException;
 
+
 import javax.swing.*;
 import java.awt.*;
 
 public class SnifferDashboard extends JFrame {
 
     SnifferMenuBar menuBar = new SnifferMenuBar(this);
-    PacketsDisplayPanel packetsDisplayPanel = new PacketsDisplayPanel();
-    PacketInformationPanel packetInformationPanel = new PacketInformationPanel();
     PacketQueryPanel packetQueryPanel = new PacketQueryPanel();
+    PacketPanelsWrapper packetPanelsWrapper = new PacketPanelsWrapper();
 
     public SnifferDashboard() throws PcapNativeException {
         this.setTitle("Sniffer");
@@ -26,12 +26,12 @@ public class SnifferDashboard extends JFrame {
         this.setJMenuBar(menuBar);
 
         //set layout of frame
-        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
 
-        //Adding panels to frame
-        this.add(packetQueryPanel);
-        this.add(packetsDisplayPanel);
-        this.add(packetInformationPanel);
+        //Adding panels
+        this.add(packetQueryPanel, BorderLayout.NORTH);
+        this.add(packetPanelsWrapper, BorderLayout.CENTER);
+
 
 
         this.setVisible(true);

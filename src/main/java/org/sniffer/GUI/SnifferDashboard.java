@@ -1,8 +1,6 @@
 package org.sniffer.GUI;
 
 import org.pcap4j.core.PcapNativeException;
-import org.sniffer.GUI.menus.PacketInformationPanel;
-import org.sniffer.GUI.menus.PacketQueryPanel;
 
 import javax.swing.*;
 import java.awt.*;

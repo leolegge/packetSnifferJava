@@ -1,4 +1,4 @@
-package org.sniffer.GUI.menus;
+package org.sniffer.GUI;
 
 
 

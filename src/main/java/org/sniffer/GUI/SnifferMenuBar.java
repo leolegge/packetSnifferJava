@@ -14,7 +14,7 @@ import javax.swing.*;
 public class SnifferMenuBar extends JMenuBar {
     private SelectNetworkMenu networkMenu = new SelectNetworkMenu(this.dashboard);
     private EditMenu editMenu = new EditMenu();
-    private ViewMenu viewMenu = new ViewMenu();
+    private ViewMenu viewMenu = new ViewMenu(this.dashboard);
 
 
     private SnifferDashboard dashboard;

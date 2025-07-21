@@ -1,6 +1,10 @@
 package org.sniffer.GUI.menus;
 
+import org.sniffer.GUI.SnifferDashboard;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This class allows for different parts of the menu to be toggled and un-toggled for a cleaner look
@@ -8,8 +12,24 @@ import javax.swing.*;
  */
 
 public class ViewMenu extends JMenu {
+    private SnifferDashboard dashboard;
+    private JButton applicationView = new JButton("Application view");
 
-    public ViewMenu() {
+    public ViewMenu(SnifferDashboard dashboard) {
         super("View");
+        this.dashboard = dashboard;
+        this.add(applicationView);
+
+
+        //listeners
+        applicationView.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+
+
+            }
+        });
+
+
     }
 }

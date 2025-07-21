@@ -5,6 +5,10 @@ import org.sniffer.GUI.packetPanels.PacketsDisplayPanel;
 
 import javax.swing.*;
 
+/**
+ * This is the wrapper for the main display area of packets and their information
+ *
+ */
 public class PacketPanelsWrapper extends JPanel {
     PacketsDisplayPanel packetsDisplayPanel = new PacketsDisplayPanel();
     PacketInformationPanel packetInformationPanel = new PacketInformationPanel();

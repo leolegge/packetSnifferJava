@@ -6,6 +6,10 @@ import org.pcap4j.core.PcapNativeException;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This is the main GUI class which contains all the necessary panels for the program
+ *
+ */
 public class SnifferDashboard extends JFrame {
 
     SnifferMenuBar menuBar = new SnifferMenuBar(this);

@@ -15,7 +15,7 @@ import java.awt.*;
 public class SnifferDashboard extends JFrame {
 
     private SnifferMenuBar menuBar;
-    private PacketQueryPanel packetQueryPanel = new PacketQueryPanel();
+    private PacketQueryPanel packetQueryPanel;
     private PacketPanelsWrapper packetPanelsWrapper = new PacketPanelsWrapper();
 
     private PacketSniffer packetSniffer;
@@ -38,6 +38,9 @@ public class SnifferDashboard extends JFrame {
 
         //Adding menu bar
         this.setJMenuBar(menuBar);
+
+        //setting up query panel
+        packetQueryPanel = new PacketQueryPanel(this);
 
         //set layout of frame
         this.setLayout(new BorderLayout());

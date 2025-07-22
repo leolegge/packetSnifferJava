@@ -60,7 +60,7 @@ public class SelectNetworkMenu extends JMenu {
                     dashboard.getDashboardPacketQueryPanel().getStartStopSnifferPanel().getStartSnifferButton().setEnabled(true);
 
                     //Sets up the packet sniffer once a network to sniff is chosen, NOTE - this doesn't run it
-                    dashboard.setPacketSniffer(new PacketSniffer(dashboard.getNetworkInterface(),
+                    dashboard.setPacketSniffer(new PacketSniffer(dashboard,dashboard.getNetworkInterface(),
                             PcapNetworkInterface.PromiscuousMode.PROMISCUOUS));
                     dashboard.setSnifferThread(new Thread(dashboard.getPacketSniffer()));
 

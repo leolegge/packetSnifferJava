@@ -16,11 +16,17 @@ import java.awt.event.ActionListener;
  */
 public class PacketQueryPanel extends JPanel {
 
+    private SnifferDashboard dashboard;
+
     private final JTextField queryField = new JTextField();
     private final FilterButtonPanel filterButtonPanel = new FilterButtonPanel();
-    private final StartStopSnifferPanel startStopSnifferPanel = new StartStopSnifferPanel();
+    private final StartStopSnifferPanel startStopSnifferPanel;
 
-    public PacketQueryPanel() {
+    public PacketQueryPanel(SnifferDashboard dashboard) {
+        this.dashboard = dashboard;
+        //setting up start stop buttons
+        startStopSnifferPanel = new StartStopSnifferPanel(dashboard);
+
         this.setPreferredSize(new Dimension(0, 20));
         this.setLayout(new BorderLayout());
         this.add(queryField, BorderLayout.CENTER);
@@ -54,6 +60,9 @@ public class PacketQueryPanel extends JPanel {
 
     public StartStopSnifferPanel getStartStopSnifferPanel() {
         return startStopSnifferPanel;
+    }
+    public SnifferDashboard getSnifferDashboard() {
+        return dashboard;
     }
 
 

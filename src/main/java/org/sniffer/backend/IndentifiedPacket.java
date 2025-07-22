@@ -8,9 +8,6 @@ public class IndentifiedPacket {
     private Packet packet;
     private PacketType packetType;
 
-    //TODO nest this properly so high level packets are identified first
-
-
     public IndentifiedPacket(Packet packet) {
         if (packet.contains(TcpPacket.class)) {
             this.packet = packet.get(TcpPacket.class);

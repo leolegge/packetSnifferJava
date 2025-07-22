@@ -48,7 +48,7 @@ public class PacketSniffer implements Runnable {
                     packetNumber++;
                     System.out.println("Packet " + packetNumber + " " + packet.getHeader()); //Can add to GUI here
 
-
+                    //TODO fix bug to do with stopping and starting the thread again
 
                     //Writing onto the Detail frame
                     if(dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()){

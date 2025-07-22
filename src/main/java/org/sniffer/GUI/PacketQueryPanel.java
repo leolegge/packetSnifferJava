@@ -2,6 +2,9 @@ package org.sniffer.GUI;
 
 
 
+import org.sniffer.GUI.snifferDashboardPanels.FilterButtonPanel;
+import org.sniffer.GUI.snifferDashboardPanels.StartStopSnifferPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,16 +16,9 @@ import java.awt.event.ActionListener;
  */
 public class PacketQueryPanel extends JPanel {
 
-    private JTextField queryField = new JTextField();
-
-    //TODO refcator filterButtonPanel and startStopSnifferPanel into two separate classes to increase maintainability
-    private JPanel filterButtonPanel = new JPanel(new BorderLayout());
-    private JButton applyFilterButton = new JButton("Apply filter");
-    private JButton clearFilterButton = new JButton("Clear filter");
-
-    private JPanel startStopSnifferPanel = new JPanel(new BorderLayout());
-    private JButton startSnifferButton = new JButton("Start sniffer");
-    private JButton stopSnifferButton = new JButton("Stop sniffer");
+    private final JTextField queryField = new JTextField();
+    private final FilterButtonPanel filterButtonPanel = new FilterButtonPanel();
+    private final StartStopSnifferPanel startStopSnifferPanel = new StartStopSnifferPanel();
 
     public PacketQueryPanel() {
         this.setPreferredSize(new Dimension(0, 20));
@@ -39,42 +35,10 @@ public class PacketQueryPanel extends JPanel {
 
         //setting up filters buttons
         this.add(filterButtonPanel, BorderLayout.EAST);
-        filterButtonPanel.add(applyFilterButton, BorderLayout.WEST);
-        filterButtonPanel.add(clearFilterButton, BorderLayout.EAST);
 
-        applyFilterButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        clearFilterButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
         //setting up start and stop buttons
         this.add(startStopSnifferPanel, BorderLayout.WEST);
-        startStopSnifferPanel.add(startSnifferButton, BorderLayout.WEST);
-        startStopSnifferPanel.add(stopSnifferButton, BorderLayout.EAST);
-        startSnifferButton.setEnabled(false);
-        stopSnifferButton.setEnabled(false);
-
-        startSnifferButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                startSnifferButton.setEnabled(false);
-                stopSnifferButton.setEnabled(true);
-            }
-        });
-
-        stopSnifferButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                startSnifferButton.setEnabled(true);
-                stopSnifferButton.setEnabled(false);
-            }
-        });
-
 
 
     }
@@ -83,18 +47,17 @@ public class PacketQueryPanel extends JPanel {
     public JTextField getQueryField() {
         return queryField;
     }
-    public JButton getApplyFilterButton() {
-        return applyFilterButton;
+
+    public FilterButtonPanel getFilterButtonPanel() {
+        return filterButtonPanel;
     }
-    public JButton getClearFilterButton() {
-        return clearFilterButton;
+
+    public StartStopSnifferPanel getStartStopSnifferPanel() {
+        return startStopSnifferPanel;
     }
-    public JButton getStartSnifferButton() {
-        return startSnifferButton;
-    }
-    public JButton getStopSnifferButton() {
-        return stopSnifferButton;
-    }
+
+
+
 
 
 }

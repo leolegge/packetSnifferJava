@@ -57,7 +57,7 @@ public class SelectNetworkMenu extends JMenu {
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     dashboard.setNetworkInterface(getNetworkInterface(item.getText()));
-                    dashboard.getDashboardPacketQueryPanel().getStartSnifferButton().setEnabled(true);
+                    dashboard.getDashboardPacketQueryPanel().getStartStopSnifferPanel().getStartSnifferButton().setEnabled(true);
 
                     //Sets up the packet sniffer once a network to sniff is chosen, NOTE - this doesn't run it
                     dashboard.setPacketSniffer(new PacketSniffer(dashboard.getNetworkInterface(),

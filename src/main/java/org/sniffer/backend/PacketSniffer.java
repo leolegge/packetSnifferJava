@@ -46,14 +46,22 @@ public class PacketSniffer implements Runnable {
             }
 
             handle.close();
-            System.out.println("Stopped sniffing.");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
+    //getters
     public SnifferDashboard getDashboard() {
         return dashboard;
+    }
+    public boolean isRunning() {
+        return running;
+    }
+
+    //setters
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 }

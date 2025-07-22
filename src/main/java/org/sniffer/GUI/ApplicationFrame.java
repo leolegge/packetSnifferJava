@@ -4,8 +4,6 @@ import javax.swing.*;
 
 public class ApplicationFrame extends JFrame {
 
-
-
     public ApplicationFrame(SnifferDashboard dashboard) {
         this.setTitle("Application Viewer");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

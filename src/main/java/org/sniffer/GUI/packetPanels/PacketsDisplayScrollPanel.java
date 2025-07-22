@@ -5,12 +5,7 @@ import java.awt.*;
 
 public class PacketsDisplayScrollPanel extends JScrollPane {
 
-
-    public PacketsDisplayScrollPanel(PacketsDisplayPanel packetsDisplayPanel) {
-        super(packetsDisplayPanel);
-
-
-
-
+    public PacketsDisplayScrollPanel(JTable table) {
+        super(table);
     }
 }

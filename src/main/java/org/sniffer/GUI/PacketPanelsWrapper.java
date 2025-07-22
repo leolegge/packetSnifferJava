@@ -11,13 +11,13 @@ import javax.swing.*;
  *
  */
 public class PacketPanelsWrapper extends JPanel {
-    PacketsDisplayScrollPanel packetsDisplayScrollPanel = new PacketsDisplayScrollPanel(
-            new PacketsDisplayPanel());
+
+    PacketsDisplayPanel packetsDisplayPanel = new PacketsDisplayPanel();
     PacketInformationPanel packetInformationPanel = new PacketInformationPanel();
 
     public PacketPanelsWrapper() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(packetsDisplayScrollPanel);
+        this.add(packetsDisplayPanel);
         this.add(packetInformationPanel);
     }
 

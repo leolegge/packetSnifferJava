@@ -15,6 +15,8 @@ public class PacketSniffer implements Runnable {
     PcapNetworkInterface.PromiscuousMode promiscuousMode;
     private boolean running = true;
 
+
+
     private SnifferDashboard dashboard;
 
 

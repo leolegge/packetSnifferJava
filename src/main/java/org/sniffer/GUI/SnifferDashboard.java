@@ -18,6 +18,8 @@ public class SnifferDashboard extends JFrame {
     private PacketQueryPanel packetQueryPanel;
     private PacketPanelsWrapper packetPanelsWrapper = new PacketPanelsWrapper();
 
+
+
     private PacketSniffer packetSniffer;
     private Thread snifferThread;
 

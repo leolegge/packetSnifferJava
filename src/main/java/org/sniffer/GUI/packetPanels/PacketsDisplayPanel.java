@@ -10,7 +10,11 @@ public class PacketsDisplayPanel extends JPanel {
 
     PacketsDisplayScrollPanel packetsDisplayScrollPanel;
 
-    private final String[] PACKET_COLUMNS_NAMES = {"Packet Number", "Packet source", "packet destination", "Protocol", "Length"};
+    private final String[] PACKET_COLUMNS_NAMES = {"Placeholder header 1",
+            "Placeholder header 2",
+            "Placeholder header 3",
+            "Placeholder header 4",
+            "Placeholder header 5"};
 
     //TODO this allows us to add rows to the table hopefully the program can deal with the amount of data
     //TODO add a listener handler to choose what data to send to the information panel when the table is pressed on

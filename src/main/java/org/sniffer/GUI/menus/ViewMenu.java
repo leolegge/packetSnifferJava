@@ -1,6 +1,6 @@
 package org.sniffer.GUI.menus;
 
-import org.sniffer.GUI.ApplicationFrame;
+import org.sniffer.GUI.DetailFrame;
 import org.sniffer.GUI.SnifferDashboard;
 import org.sniffer.GUI.WorldViewFrame;
 
@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 
 public class ViewMenu extends JMenu {
     private SnifferDashboard dashboard;
-    private JButton applicationView = new JButton("Application view");
+    private JButton applicationView = new JButton("Detail view");
     private JButton worldView = new JButton("World View");
 
     public ViewMenu(SnifferDashboard dashboard) {
@@ -28,7 +28,7 @@ public class ViewMenu extends JMenu {
         applicationView.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //TODO make this a user friendly way to see what applications use what packets
-                ApplicationFrame applicationFrame = new ApplicationFrame(dashboard);
+                DetailFrame detailFrame = new DetailFrame(dashboard);
             }
         });
 

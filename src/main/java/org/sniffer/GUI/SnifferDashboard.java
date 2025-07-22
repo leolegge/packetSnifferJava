@@ -92,6 +92,7 @@ public class SnifferDashboard extends JFrame {
 
     //general methods
     public void startSniffer() {
+        packetSniffer.setRunning(true);
         snifferThread.start();
     }
 

@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//TODO make it so all options to sniff from get disabled whilst sniffing
+
 public class StartStopSnifferPanel extends JPanel {
 
     private SnifferDashboard dashboard;

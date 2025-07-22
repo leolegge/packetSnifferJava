@@ -40,13 +40,27 @@ public class PacketSniffer implements Runnable {
 
             System.out.println("Started sniffing on " + networkInterface.getName());
 
-            int i = 0;
+            int packetNumber = 0;
             while (running) {
 
                 Packet packet = handle.getNextPacket();
                 if (packet != null) {
-                    i++;
-                    System.out.println("Packet " + i + " " + packet.getHeader()); //Can add to GUI here
+                    packetNumber++;
+                    System.out.println("Packet " + packetNumber + " " + packet.getHeader()); //Can add to GUI here
+
+
+
+                    //Writing onto the Detail frame
+                    if(dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()){
+                        dashboard.getDashboardMenuBar().
+                                getViewMenu().
+                                getDetailFrameAuthenticator().
+                                getDetailFrame().
+                                addRowToTable(packet, packetNumber);
+                    }
+
+
+
                 }
             }
 

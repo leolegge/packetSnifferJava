@@ -48,4 +48,9 @@ public class SnifferMenuBar extends JMenuBar {
         return networkMenu;
     }
 
+    public ViewMenu getViewMenu(){
+        return viewMenu;
+    }
+
+
 }

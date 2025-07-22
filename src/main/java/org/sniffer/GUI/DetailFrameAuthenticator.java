@@ -29,7 +29,11 @@ public class DetailFrameAuthenticator {
 
     //getters
     public DetailFrame getDetailFrame(){
-        return this.frame;
+        if(authenticated){
+            return this.frame;
+        }
+        return null;
+
     }
     public boolean isAuthenticated() {
         return authenticated;

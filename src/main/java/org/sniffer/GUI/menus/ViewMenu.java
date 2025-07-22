@@ -1,6 +1,7 @@
 package org.sniffer.GUI.menus;
 
 import org.sniffer.GUI.DetailFrame;
+import org.sniffer.GUI.DetailFrameAuthenticator;
 import org.sniffer.GUI.SnifferDashboard;
 import org.sniffer.GUI.WorldViewFrame;
 
@@ -18,17 +19,20 @@ public class ViewMenu extends JMenu {
     private JButton applicationView = new JButton("Detail view");
     private JButton worldView = new JButton("World View");
 
+    private DetailFrameAuthenticator detailFrameAuthenticator;
+
     public ViewMenu(SnifferDashboard dashboard) {
         super("View");
         this.dashboard = dashboard;
         this.add(applicationView);
         this.add(worldView);
+        this.detailFrameAuthenticator = new DetailFrameAuthenticator(dashboard);
 
         //listeners
         applicationView.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //TODO make this a user friendly way to see what applications use what packets
-                DetailFrame detailFrame = new DetailFrame(dashboard);
+                detailFrameAuthenticator.createDetailFrame();
             }
         });
 
@@ -38,4 +42,10 @@ public class ViewMenu extends JMenu {
             }
         });
     }
+
+    //getters
+    public DetailFrameAuthenticator getDetailFrameAuthenticator() {
+        return detailFrameAuthenticator;
+    }
+
 }

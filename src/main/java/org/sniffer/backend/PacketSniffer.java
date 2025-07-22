@@ -6,6 +6,9 @@ import org.pcap4j.packet.Packet;
 import org.sniffer.GUI.SnifferDashboard;
 
 //TODO update this class to deal with more stuff
+//TODO write straight to JTables from this class when running
+//TODO also use a dumper to save the current capture
+
 
 public class PacketSniffer implements Runnable {
 

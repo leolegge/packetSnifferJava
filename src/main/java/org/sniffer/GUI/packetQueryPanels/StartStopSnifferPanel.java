@@ -6,8 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-//TODO make it so all options to sniff from get disabled whilst sniffing
+import java.util.ArrayList;
 
 public class StartStopSnifferPanel extends JPanel {
 
@@ -45,8 +44,8 @@ public class StartStopSnifferPanel extends JPanel {
                 stopSnifferButton.setEnabled(false);
 
                 dashboard.getDashboardMenuBar().getNetworkMenu().enableRadioButtons();
-
                 dashboard.stopSniffer();
+
             }
         });
 

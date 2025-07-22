@@ -2,11 +2,17 @@ package org.sniffer.GUI;
 
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
+import org.pcap4j.packet.Packet;
 import org.sniffer.backend.PacketSniffer;
 
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+
+//TODO add saving and loading using Pcap dump this is to be implemented after packets can be pushed to both Detail frame
+//TODO and the main frame
+
 
 /**
  * This is the main GUI class which contains all the necessary panels for the program
@@ -17,7 +23,6 @@ public class SnifferDashboard extends JFrame {
     private SnifferMenuBar menuBar;
     private PacketQueryPanel packetQueryPanel;
     private PacketPanelsWrapper packetPanelsWrapper = new PacketPanelsWrapper();
-
 
 
     private PacketSniffer packetSniffer;
@@ -80,6 +85,7 @@ public class SnifferDashboard extends JFrame {
     }
 
 
+
     //setter
     public void setNetworkInterface(PcapNetworkInterface networkInterface) {
         this.networkInterface = networkInterface;
@@ -101,7 +107,4 @@ public class SnifferDashboard extends JFrame {
     public void stopSniffer() {
         packetSniffer.setRunning(false);
     }
-
-
-
 }

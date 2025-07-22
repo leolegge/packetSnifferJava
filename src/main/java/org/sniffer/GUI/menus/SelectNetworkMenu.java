@@ -57,14 +57,17 @@ public class SelectNetworkMenu extends JMenu {
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     dashboard.setNetworkInterface(getNetworkInterface(item.getText()));
-                    System.out.println("Dashboard current network interface: " + dashboard.getNetworkInterface());
-
+                    dashboard.getDashboardPacketQueryPanel().getStartSnifferButton().setEnabled(true);
                     //TODO add a play button to start reading after selecting network to sniff
 
-                    PacketSniffer sniffer = new PacketSniffer(dashboard.getNetworkInterface(),
-                            PcapNetworkInterface.PromiscuousMode.PROMISCUOUS);
-                    Thread snifferThread = new Thread(sniffer);
-                    snifferThread.start();
+
+
+                    dashboard.setPacketSniffer(new PacketSniffer(dashboard.getNetworkInterface(),
+                            PcapNetworkInterface.PromiscuousMode.PROMISCUOUS));
+
+                    System.out.println(dashboard.getPacketSniffer().toString());
+                    //Thread snifferThread = new Thread(sniffer);
+                    //snifferThread.start();
 
 
                 }

@@ -2,8 +2,8 @@ package org.sniffer.GUI;
 
 
 
-import org.sniffer.GUI.snifferDashboardPanels.FilterButtonPanel;
-import org.sniffer.GUI.snifferDashboardPanels.StartStopSnifferPanel;
+import org.sniffer.GUI.packetQueryPanels.FilterButtonPanel;
+import org.sniffer.GUI.packetQueryPanels.StartStopSnifferPanel;
 
 import javax.swing.*;
 import java.awt.*;

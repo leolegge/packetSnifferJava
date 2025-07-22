@@ -1,4 +1,4 @@
-package org.sniffer.GUI.snifferDashboardPanels;
+package org.sniffer.GUI.packetQueryPanels;
 
 import javax.swing.*;
 import java.awt.*;

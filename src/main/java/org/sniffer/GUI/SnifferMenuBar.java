@@ -42,4 +42,10 @@ public class SnifferMenuBar extends JMenuBar {
 
     }
 
+
+    //getters
+    public SelectNetworkMenu getNetworkMenu(){
+        return networkMenu;
+    }
+
 }

@@ -83,5 +83,17 @@ public class SelectNetworkMenu extends JMenu {
         return null;
     }
 
+    public void disableRadioButtons(){
+        for (JRadioButtonMenuItem item : networkItems) {
+            item.setEnabled(false);
+        }
+    }
+
+    public void enableRadioButtons(){
+        for (JRadioButtonMenuItem item : networkItems) {
+            item.setEnabled(true);
+        }
+    }
+
 
 }

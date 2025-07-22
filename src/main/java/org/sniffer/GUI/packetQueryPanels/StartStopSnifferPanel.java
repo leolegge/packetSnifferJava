@@ -33,6 +33,8 @@ public class StartStopSnifferPanel extends JPanel {
                 startSnifferButton.setEnabled(false);
                 stopSnifferButton.setEnabled(true);
 
+                dashboard.getDashboardMenuBar().getNetworkMenu().disableRadioButtons();
+
                 dashboard.startSniffer();
             }
         });
@@ -41,6 +43,8 @@ public class StartStopSnifferPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 startSnifferButton.setEnabled(true);
                 stopSnifferButton.setEnabled(false);
+
+                dashboard.getDashboardMenuBar().getNetworkMenu().enableRadioButtons();
 
                 dashboard.stopSniffer();
             }

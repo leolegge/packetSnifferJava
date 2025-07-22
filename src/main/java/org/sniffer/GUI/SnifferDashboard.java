@@ -19,6 +19,7 @@ public class SnifferDashboard extends JFrame {
     private PacketPanelsWrapper packetPanelsWrapper = new PacketPanelsWrapper();
 
     private PacketSniffer packetSniffer;
+    private Thread snifferThread;
 
     private PcapNetworkInterface networkInterface = null;
 
@@ -69,6 +70,9 @@ public class SnifferDashboard extends JFrame {
     public PacketSniffer getPacketSniffer() {
         return packetSniffer;
     }
+    public Thread getSnifferThread(){
+        return snifferThread;
+    }
 
 
     //setter
@@ -78,6 +82,18 @@ public class SnifferDashboard extends JFrame {
 
     public void setPacketSniffer(PacketSniffer packetSniffer) {
         this.packetSniffer = packetSniffer;
+    }
+    public void setSnifferThread(Thread snifferThread) {
+        this.snifferThread = snifferThread;
+    }
+
+    //general methods
+    public void startSniffer() {
+        snifferThread.start();
+    }
+
+    public void stopSniffer() {
+        snifferThread.interrupt();
     }
 
 

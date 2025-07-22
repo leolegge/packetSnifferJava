@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 public class PacketQueryPanel extends JPanel {
 
     private JTextField queryField = new JTextField();
+
+    //TODO refcator filterButtonPanel and startStopSnifferPanel into two separate classes to increase maintainability
     private JPanel filterButtonPanel = new JPanel(new BorderLayout());
     private JButton applyFilterButton = new JButton("Apply filter");
     private JButton clearFilterButton = new JButton("Clear filter");

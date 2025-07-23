@@ -11,7 +11,7 @@ import java.awt.*;
 public class DetailFrame extends JFrame {
 
     DetailedPacketsDisplayScrollPanel packetsDisplayScrollPanel;
-    private final String[] PACKET_COLUMNS_NAMES = {"Packet Number", "Packet source", "packet destination", "Protocol", "Length"};
+    private final String[] PACKET_COLUMNS_NAMES = {"Packet Number", "Packet source", "packet destination", "Protocol", "Inner Protocol","Length (Bytes)"};
 
 
     DefaultTableModel mainDetailedPacketTable;
@@ -34,8 +34,9 @@ public class DetailFrame extends JFrame {
 
     }
 
-    //TODO make it able to add packets
-    //TODO find out how to add correct stuff for correct packets
+    //TODO this needs a refactor
+
+
     public void addRowToTable(Packet packet, int packetNumber) {
 
 
@@ -43,38 +44,39 @@ public class DetailFrame extends JFrame {
         //Finding what packet type it is
         IndentifiedPacket indentifiedPacket = new IndentifiedPacket(packet);
 
+
         switch (indentifiedPacket.getPacketType()) {
             case IPV4:
                 IpV4Packet ipv4 = (IpV4Packet) indentifiedPacket.getPacket();
-                mainDetailedPacketTable.addRow(new Object[]{packetNumber, ipv4.getHeader().getSrcAddr(), ipv4.getHeader().getDstAddr(), indentifiedPacket.getPacketType().toString() });
+                mainDetailedPacketTable.addRow(new Object[]{packetNumber, ipv4.getHeader().getSrcAddr(), ipv4.getHeader().getDstAddr(), indentifiedPacket.getPacketType().toString(), ipv4.getHeader().getProtocol().toString()});
                 break;
             case TCP:
                 TcpPacket tcp = (TcpPacket) indentifiedPacket.getPacket();
-                mainDetailedPacketTable.addRow(new Object[]{packetNumber, tcp.getHeader().getSrcPort().valueAsInt(),tcp.getHeader().getDstPort().valueAsInt(), indentifiedPacket.getPacketType().toString() });
+                mainDetailedPacketTable.addRow(new Object[]{packetNumber, tcp.getHeader().getSrcPort().valueAsInt(),tcp.getHeader().getDstPort().valueAsInt(), indentifiedPacket.getPacketType().toString()});
                 break;
             case UDP:
                 UdpPacket udp = (UdpPacket) indentifiedPacket.getPacket();
-                mainDetailedPacketTable.addRow(new Object[]{packetNumber, });
+                mainDetailedPacketTable.addRow(new Object[]{packetNumber, udp.getHeader().getSrcPort(), udp.getHeader().getDstPort(), indentifiedPacket.getPacketType().toString(), udp.getHeader().getLengthAsInt() });
                 break;
             case IPV6:
                 IpV6Packet ipv6 = (IpV6Packet) indentifiedPacket.getPacket();
-                mainDetailedPacketTable.addRow(new Object[]{packetNumber, });
+                mainDetailedPacketTable.addRow(new Object[]{packetNumber, ipv6.getHeader().getSrcAddr(), ipv6.getHeader().getDstAddr(), indentifiedPacket.getPacketType().toString(), ipv6.getHeader().getProtocol().toString()});
                 break;
             case ETHERNET:
                 EthernetPacket eth = (EthernetPacket) indentifiedPacket.getPacket();
-                mainDetailedPacketTable.addRow(new Object[]{packetNumber, });
+                mainDetailedPacketTable.addRow(new Object[]{packetNumber, eth.getHeader().getSrcAddr(), eth.getHeader().getDstAddr(), indentifiedPacket.getPacketType().toString()});
                 break;
             case ARP:
                 ArpPacket arp = (ArpPacket) indentifiedPacket.getPacket();
-                mainDetailedPacketTable.addRow(new Object[]{packetNumber, });
+                mainDetailedPacketTable.addRow(new Object[]{packetNumber, arp.getHeader().getSrcHardwareAddr(), arp.getHeader().getDstHardwareAddr(), indentifiedPacket.getPacketType().toString(), arp.getHeader().getProtocolType().toString()});
                 break;
             case ICMPV4:
                 IcmpV4CommonPacket icmpv4 = (IcmpV4CommonPacket) indentifiedPacket.getPacket();
-                mainDetailedPacketTable.addRow(new Object[]{packetNumber, });
+                mainDetailedPacketTable.addRow(new Object[]{packetNumber, "N/A", "N/A", indentifiedPacket.getPacketType().toString()});
                 break;
             case ICMPV6:
                 IcmpV6CommonPacket icmpv6 = (IcmpV6CommonPacket) indentifiedPacket.getPacket();
-                mainDetailedPacketTable.addRow(new Object[]{packetNumber, });
+                mainDetailedPacketTable.addRow(new Object[]{packetNumber, "N/A", "N/A", indentifiedPacket.getPacketType().toString()});
                 break;
             case UNKNOWN:
                 //Do nothing probably could add stuff

@@ -48,6 +48,7 @@ public class PacketSniffer implements Runnable {
                     System.out.println("Packet " + packetNumber + " " + packet.getHeader());
                     dashboard.addSharedPacket(packet);
 
+
                     //Writing onto the Detail frame
                     if(dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()){
                         dashboard.getDashboardMenuBar().

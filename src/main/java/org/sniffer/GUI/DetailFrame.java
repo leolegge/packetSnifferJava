@@ -7,6 +7,7 @@ import org.sniffer.backend.IndentifiedPacket;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.Arrays;
 
 public class DetailFrame extends JFrame {
 
@@ -35,7 +36,6 @@ public class DetailFrame extends JFrame {
     }
 
     //TODO this needs a refactor
-
 
     public void addRowToTable(Packet packet, int packetNumber) {
 

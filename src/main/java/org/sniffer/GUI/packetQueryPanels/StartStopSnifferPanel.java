@@ -33,7 +33,7 @@ public class StartStopSnifferPanel extends JPanel {
                 stopSnifferButton.setEnabled(true);
 
                 dashboard.getDashboardMenuBar().getNetworkMenu().disableRadioButtons();
-
+                dashboard.setSnifferThread(new Thread(dashboard.getPacketSniffer()));
                 dashboard.startSniffer();
             }
         });

@@ -1,8 +1,7 @@
 package org.sniffer.GUI;
 
 import org.pcap4j.packet.*;
-import org.pcap4j.packet.namednumber.EtherType;
-import org.sniffer.GUI.applicationFramePanels.DetailedPacketsDisplayScrollPanel;
+import org.sniffer.GUI.detailFramePanels.DetailedPacketsDisplayScrollPanel;
 import org.sniffer.backend.IndentifiedPacket;
 
 import javax.swing.*;
@@ -83,6 +82,16 @@ public class DetailFrame extends JFrame {
             default:
                 System.out.println("Unknown packet type");
         }
+
+
+        //TODO make this so it only does this if the user isn't looking at a packet not sure if possible
+        //setting screen to the bottom
+        JScrollBar verticalBar = packetsDisplayScrollPanel.getVerticalScrollBar();
+        verticalBar.setValue(verticalBar.getMaximum());
+
+
+
+
 
 
     }

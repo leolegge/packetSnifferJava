@@ -9,6 +9,8 @@ import org.sniffer.backend.PacketSniffer;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 //TODO add saving and loading using Pcap dump this is to be implemented after packets can be pushed to both Detail frame
 //TODO and the main frame
@@ -23,6 +25,9 @@ public class SnifferDashboard extends JFrame {
     private SnifferMenuBar menuBar;
     private PacketQueryPanel packetQueryPanel;
     private PacketPanelsWrapper packetPanelsWrapper = new PacketPanelsWrapper();
+
+
+    private List<Packet> sharedPacketList;
 
 
     private PacketSniffer packetSniffer;
@@ -83,6 +88,12 @@ public class SnifferDashboard extends JFrame {
     public Thread getSnifferThread(){
         return snifferThread;
     }
+    public List<Packet> getSharedPacketList() {
+        synchronized (sharedPacketList) {
+            return sharedPacketList;
+        }
+    }
+
 
 
 
@@ -97,6 +108,9 @@ public class SnifferDashboard extends JFrame {
     public void setSnifferThread(Thread snifferThread) {
         this.snifferThread = snifferThread;
     }
+    public void setSharedPacketList(List<Packet> sharedPacketList) {
+        this.sharedPacketList = sharedPacketList;
+    }
 
     //general methods
     public void startSniffer() {
@@ -107,4 +121,10 @@ public class SnifferDashboard extends JFrame {
     public void stopSniffer() {
         packetSniffer.setRunning(false);
     }
+
+    public void addSharedPacket(Packet packet) {
+        sharedPacketList.add(packet);
+    }
+
+
 }

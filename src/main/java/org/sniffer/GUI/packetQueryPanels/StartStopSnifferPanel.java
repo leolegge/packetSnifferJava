@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StartStopSnifferPanel extends JPanel {
 
@@ -34,6 +35,7 @@ public class StartStopSnifferPanel extends JPanel {
 
                 dashboard.getDashboardMenuBar().getNetworkMenu().disableRadioButtons();
                 dashboard.setSnifferThread(new Thread(dashboard.getPacketSniffer()));
+                dashboard.setSharedPacketList(Collections.synchronizedList(new ArrayList<>()));
                 dashboard.startSniffer();
             }
         });

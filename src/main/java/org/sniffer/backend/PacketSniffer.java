@@ -5,7 +5,6 @@ import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.packet.Packet;
 import org.sniffer.GUI.SnifferDashboard;
 
-//TODO update this class to deal with more stuff
 //TODO write straight to JTables from this class when running
 //TODO also use a dumper to save the current capture
 
@@ -46,9 +45,8 @@ public class PacketSniffer implements Runnable {
                 Packet packet = handle.getNextPacket();
                 if (packet != null) {
                     packetNumber++;
-                    System.out.println("Packet " + packetNumber + " " + packet.getHeader()); //Can add to GUI here
-
-                    //TODO fix bug to do with stopping and starting the thread again
+                    System.out.println("Packet " + packetNumber + " " + packet.getHeader());
+                    dashboard.addSharedPacket(packet);
 
                     //Writing onto the Detail frame
                     if(dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()){
@@ -58,9 +56,6 @@ public class PacketSniffer implements Runnable {
                                 getDetailFrame().
                                 addRowToTable(packet, packetNumber);
                     }
-
-
-
                 }
             }
 

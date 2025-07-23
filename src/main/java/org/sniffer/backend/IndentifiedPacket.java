@@ -9,7 +9,16 @@ public class IndentifiedPacket {
     private PacketType packetType;
 
     public IndentifiedPacket(Packet packet) {
-        if (packet.contains(TcpPacket.class)) {
+        if (packet.contains(IpV4Packet.class)) {
+            this.packet = packet.get(IpV4Packet.class);
+            this.packetType = PacketType.IPV4;
+        } else if (packet.contains(IpV6Packet.class)) {
+            this.packet = packet.get(IpV6Packet.class);
+            this.packetType = PacketType.IPV6;
+        } else if (packet.contains(ArpPacket.class)) {
+            this.packet = packet.get(ArpPacket.class);
+            this.packetType = PacketType.ARP;
+        } else if (packet.contains(TcpPacket.class)) {
             this.packet = packet.get(TcpPacket.class);
             this.packetType = PacketType.TCP;
         } else if (packet.contains(UdpPacket.class)) {
@@ -21,15 +30,6 @@ public class IndentifiedPacket {
         } else if (packet.contains(IcmpV6CommonPacket.class)) {
             this.packet = packet.get(IcmpV6CommonPacket.class);
             this.packetType = PacketType.ICMPV6;
-        } else if (packet.contains(IpV4Packet.class)) {
-            this.packet = packet.get(IpV4Packet.class);
-            this.packetType = PacketType.IPV4;
-        } else if (packet.contains(IpV6Packet.class)) {
-            this.packet = packet.get(IpV6Packet.class);
-            this.packetType = PacketType.IPV6;
-        } else if (packet.contains(ArpPacket.class)) {
-            this.packet = packet.get(ArpPacket.class);
-            this.packetType = PacketType.ARP;
         } else if (packet.contains(EthernetPacket.class)) {
             this.packet = packet.get(EthernetPacket.class);
             this.packetType = PacketType.ETHERNET;
@@ -37,6 +37,7 @@ public class IndentifiedPacket {
             this.packet = packet;
             this.packetType = PacketType.UNKNOWN;
         }
+
 
     }
 

@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 
 public class PacketSniffer implements Runnable {
 
-
+    private int packetNumber = 0;
 
     PcapNetworkInterface networkInterface;
     PcapNetworkInterface.PromiscuousMode promiscuousMode;
@@ -42,8 +42,6 @@ public class PacketSniffer implements Runnable {
             );
 
             System.out.println("Started sniffing on " + networkInterface.getName());
-
-            int packetNumber = 0;
             while (running) {
 
                 Packet packet = handle.getNextPacket();

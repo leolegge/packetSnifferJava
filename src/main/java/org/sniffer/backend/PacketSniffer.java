@@ -5,6 +5,8 @@ import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.packet.Packet;
 import org.sniffer.GUI.SnifferDashboard;
 
+import java.sql.Timestamp;
+
 //TODO write straight to JTables from this class when running
 //TODO also use a dumper to save the current capture
 
@@ -43,10 +45,18 @@ public class PacketSniffer implements Runnable {
             while (running) {
 
                 Packet packet = handle.getNextPacket();
+                Timestamp timestamp = handle.getTimestamp();
                 if (packet != null) {
                     packetNumber++;
-                    System.out.println("Packet " + packetNumber + " " + packet.getHeader());
+                    //System.out.println("Packet " + packetNumber + " " + packet.getHeader());
                     dashboard.addSharedPacket(packet);
+
+                    IdentifiedPacket identifiedPacket = new IdentifiedPacket(packet, timestamp, packetNumber);
+
+                    //Writing to the general packet frame
+                    dashboard.getDashboardPacketPanelsWrapper()
+                            .getPacketsDisplayPanel()
+                            .addRowToDisplayPanel(identifiedPacket);
 
 
                     //Writing onto the Detail frame
@@ -55,7 +65,7 @@ public class PacketSniffer implements Runnable {
                                 getViewMenu().
                                 getDetailFrameAuthenticator().
                                 getDetailFrame().
-                                addRowToTable(packet, packetNumber);
+                                addRowToTable(identifiedPacket);
                     }
                 }
             }

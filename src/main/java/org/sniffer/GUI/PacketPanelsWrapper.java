@@ -23,4 +23,11 @@ public class PacketPanelsWrapper extends JPanel {
         this.add(packetInformationPanel);
     }
 
+    public PacketsDisplayPanel getPacketsDisplayPanel() {
+        return packetsDisplayPanel;
+    }
+    public PacketInformationPanel getPacketInformationPanel() {
+        return packetInformationPanel;
+    }
+
 }

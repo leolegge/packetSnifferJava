@@ -3,12 +3,16 @@ package org.sniffer.backend;
 import org.pcap4j.packet.Packet;
 import org.pcap4j.packet.*;
 
+import java.sql.Timestamp;
+
 //TODO make a function to get the exact protocol of the received packet out of the raw hex bytes only do this for a few
 //TODO as there thousands of different protocols
 
 public class IdentifiedPacket {
 
     private final Packet rawPacket;
+    private final int packetNumber;
+    private final Timestamp timestamp;
 
     private String srcIp = "N/A";
     private String dstIp = "N/A";
@@ -17,8 +21,11 @@ public class IdentifiedPacket {
     private String dstPort = "N/A";
 
 
-    public IdentifiedPacket(Packet rawPacket) {
+
+    public IdentifiedPacket(Packet rawPacket, Timestamp timestamp, int packetNumber) {
         this.rawPacket = rawPacket;
+        this.timestamp = timestamp;
+        this.packetNumber = packetNumber;
         parsePacket();
     }
 
@@ -81,6 +88,12 @@ public class IdentifiedPacket {
     //getters
     public Packet getPacket() {
         return rawPacket;
+    }
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+    public int getPacketNumber() {
+        return packetNumber;
     }
     public String getSrcIp() {
         return srcIp;

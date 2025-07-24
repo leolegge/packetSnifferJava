@@ -36,11 +36,9 @@ public class DetailFrame extends JFrame {
 
 
 
-    public void addRowToTable(Packet packet, int packetNumber) {
+    public void addRowToTable(IdentifiedPacket identifiedPacket) {
 
-        IdentifiedPacket identifiedPacket = new IdentifiedPacket(packet);
-
-        mainDetailedPacketTable.addRow(new Object[]{packetNumber,
+        mainDetailedPacketTable.addRow(new Object[]{identifiedPacket.getPacketNumber(),
                 identifiedPacket.getSrcIp(),
                 identifiedPacket.getDstIp(),
                 identifiedPacket.getSrcPort(),

@@ -13,14 +13,22 @@ import java.awt.*;
  */
 public class PacketPanelsWrapper extends JPanel {
 
-    PacketsDisplayPanel packetsDisplayPanel = new PacketsDisplayPanel();
-    PacketInformationPanel packetInformationPanel = new PacketInformationPanel();
+    PacketsDisplayPanel packetsDisplayPanel;
+    PacketInformationPanel packetInformationPanel;
 
-    public PacketPanelsWrapper() {
+    SnifferDashboard dashboard;
+
+    public PacketPanelsWrapper(SnifferDashboard dashboard) {
+        this.dashboard = dashboard;
+        packetsDisplayPanel = new PacketsDisplayPanel(dashboard);
+        packetInformationPanel = new PacketInformationPanel(dashboard);
 
         this.setLayout(new GridLayout(2, 1));
         this.add(packetsDisplayPanel);
         this.add(packetInformationPanel);
+
+
+
     }
 
     public PacketsDisplayPanel getPacketsDisplayPanel() {

@@ -24,7 +24,7 @@ public class SnifferDashboard extends JFrame {
 
     private SnifferMenuBar menuBar;
     private PacketQueryPanel packetQueryPanel;
-    private PacketPanelsWrapper packetPanelsWrapper = new PacketPanelsWrapper();
+    private PacketPanelsWrapper packetPanelsWrapper;
 
 
     private List<Packet> sharedPacketList;
@@ -53,6 +53,9 @@ public class SnifferDashboard extends JFrame {
 
         //setting up query panel
         packetQueryPanel = new PacketQueryPanel(this);
+
+        //setting up packetWrapperPanel
+        packetPanelsWrapper = new PacketPanelsWrapper(this);
 
         //set layout of frame
         this.setLayout(new BorderLayout());
@@ -125,6 +128,27 @@ public class SnifferDashboard extends JFrame {
     public void addSharedPacket(Packet packet) {
         sharedPacketList.add(packet);
     }
+
+    public Packet findPacket(int packetNumber){
+        synchronized (sharedPacketList) {
+            return sharedPacketList.get(packetNumber-1);
+        }
+    }
+
+    public void printAllLayers(Packet packet) {
+        Packet current = packet;
+        int layer = 1;
+
+        while (current != null) {
+            System.out.println("Layer " + layer + ": " + current.getClass().getSimpleName());
+            System.out.println(current); // or current.getHeader() for just header info
+            current = current.getPayload(); // go to next inner layer
+            layer++;
+        }
+    }
+
+
+
 
 
 }

@@ -69,4 +69,8 @@ public class PacketsDisplayPanel extends JPanel {
 
     }
 
+    public void resetTable(){
+        this.mainPacketTable.setRowCount(0);
+    }
+
 }

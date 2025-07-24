@@ -13,8 +13,8 @@ import java.awt.*;
  */
 public class PacketPanelsWrapper extends JPanel {
 
-    PacketsDisplayPanel packetsDisplayPanel;
-    PacketInformationPanel packetInformationPanel;
+    private PacketsDisplayPanel packetsDisplayPanel;
+    private PacketInformationPanel packetInformationPanel;
 
     SnifferDashboard dashboard;
 
@@ -31,11 +31,13 @@ public class PacketPanelsWrapper extends JPanel {
 
     }
 
+    //getters
     public PacketsDisplayPanel getPacketsDisplayPanel() {
         return packetsDisplayPanel;
     }
     public PacketInformationPanel getPacketInformationPanel() {
         return packetInformationPanel;
     }
+
 
 }

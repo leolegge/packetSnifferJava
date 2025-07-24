@@ -13,10 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
-//TODO make it so all options here get disabled whilst sniffing
-
-
-
 
 /**
  * This is the menu for the network selection at the top of the program window
@@ -68,6 +64,8 @@ public class SelectNetworkMenu extends JMenu {
                     dashboard.setPacketSniffer(new PacketSniffer(dashboard,dashboard.getNetworkInterface(),
                             PcapNetworkInterface.PromiscuousMode.PROMISCUOUS));
                     dashboard.setSnifferThread(new Thread(dashboard.getPacketSniffer()));
+
+                    dashboard.getDashboardPacketPanelsWrapper().getPacketsDisplayPanel().resetTable();
 
                 }
             });

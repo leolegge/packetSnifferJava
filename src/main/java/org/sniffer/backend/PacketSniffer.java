@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 //TODO write straight to JTables from this class when running
 //TODO also use a dumper to save the current capture
 
-//TODO packet number must be made upon initialization
+//TODO make it so the tables reset upon choosing to sniff a new network
 
 
 public class PacketSniffer implements Runnable {

@@ -8,6 +8,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+//TODO when a new souce to sniff is selected if this is open then clear the table
+
 public class DetailFrame extends JFrame {
 
     DetailedPacketsDisplayScrollPanel packetsDisplayScrollPanel;

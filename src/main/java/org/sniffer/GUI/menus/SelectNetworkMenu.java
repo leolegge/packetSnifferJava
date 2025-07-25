@@ -66,6 +66,18 @@ public class SelectNetworkMenu extends JMenu {
                     dashboard.setSnifferThread(new Thread(dashboard.getPacketSniffer()));
 
                     dashboard.getDashboardPacketPanelsWrapper().getPacketsDisplayPanel().resetTable();
+                    //If a detail frame is on the screen then reset when new network is selected
+                    if(dashboard.getDashboardMenuBar().
+                            getViewMenu().
+                            getDetailFrameAuthenticator().
+                            isAuthenticated()
+                    ){
+                        dashboard.getDashboardMenuBar().
+                                getViewMenu().
+                                getDetailFrameAuthenticator().
+                                getDetailFrame().
+                                resetMainDetailedPacketTable();
+                    }
 
                 }
             });

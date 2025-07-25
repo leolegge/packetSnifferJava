@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-//TODO when a new souce to sniff is selected if this is open then clear the table
+//TODO when a new source to sniff is selected if this is open then clear the table
 
 public class DetailFrame extends JFrame {
 
@@ -48,17 +48,14 @@ public class DetailFrame extends JFrame {
                 identifiedPacket.getProtocol()});
 
 
-
-
         //TODO make this so it only does this if the user isn't looking at a packet not sure if possible
         //setting screen to the bottom
         JScrollBar verticalBar = packetsDisplayScrollPanel.getVerticalScrollBar();
         verticalBar.setValue(verticalBar.getMaximum());
-
-
-
-
-
-
     }
+
+    public void resetMainDetailedPacketTable() {
+        mainDetailedPacketTable.setRowCount(0);
+    }
+
 }

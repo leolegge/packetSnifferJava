@@ -31,8 +31,9 @@ public class ViewMenu extends JMenu {
         //listeners
         applicationView.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //TODO make this a user friendly way to see what applications use what packets
-                detailFrameAuthenticator.createDetailFrame();
+                if(!detailFrameAuthenticator.isAuthenticated()) {
+                    detailFrameAuthenticator.createDetailFrame();
+                }
             }
         });
 

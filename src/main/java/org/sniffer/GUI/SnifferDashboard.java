@@ -28,6 +28,7 @@ public class SnifferDashboard extends JFrame {
 
 
     private List<Packet> sharedPacketList;
+    private Packet selectedPacket = null;
 
 
     private PacketSniffer packetSniffer;
@@ -96,6 +97,9 @@ public class SnifferDashboard extends JFrame {
             return sharedPacketList;
         }
     }
+    public Packet getSelectedPacket(){
+        return selectedPacket;
+    }
 
 
 
@@ -113,6 +117,9 @@ public class SnifferDashboard extends JFrame {
     }
     public void setSharedPacketList(List<Packet> sharedPacketList) {
         this.sharedPacketList = sharedPacketList;
+    }
+    public void setSelectedPacket(Packet selectedPacket) {
+        this.selectedPacket = selectedPacket;
     }
 
     //general methods
@@ -135,6 +142,8 @@ public class SnifferDashboard extends JFrame {
         }
     }
 
+
+    /// //////////////////TEST FUNCTION
     public void printAllLayers(Packet packet) {
         Packet current = packet;
         int layer = 1;
@@ -147,8 +156,6 @@ public class SnifferDashboard extends JFrame {
         }
     }
 
-
-
-
+    /// //////////////////////////////
 
 }

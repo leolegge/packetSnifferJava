@@ -15,6 +15,8 @@ public class PacketsDisplayPanel extends JPanel {
 
     SnifferDashboard dashboard;
 
+    private boolean supressListener = false;
+
     private final String[] PACKET_COLUMNS_NAMES = {"Packet number",
             "Protocol",
             "Info",
@@ -30,23 +32,59 @@ public class PacketsDisplayPanel extends JPanel {
     public PacketsDisplayPanel(SnifferDashboard dashboard) {
         this.dashboard = dashboard;
         this.setLayout(new BorderLayout());
-        mainPacketTable = new DefaultTableModel(PACKET_COLUMNS_NAMES, 0);
+        mainPacketTable = new DefaultTableModel(PACKET_COLUMNS_NAMES, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;  // prevents editing
+            }
+        };
+
         table = new JTable(mainPacketTable);
-
-
+        table.setRowSelectionAllowed(true);
 
         //Table listener
         ListSelectionModel mainPacketTableSelectionModel = table.getSelectionModel();
 
         mainPacketTableSelectionModel.addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
+            if (!e.getValueIsAdjusting() && !supressListener) {
                 int selectedRow = table.getSelectedRow();
                 if (selectedRow != -1) {
                     //TODO can make a object from this or push to the PacketInfomationPanel
-                    dashboard.printAllLayers(dashboard.findPacket(
-                            Integer.parseInt(
-                                    table.getValueAt(selectedRow, 0).toString())));
+                    //TODO set this to the same row on the other table when clicked on
+                    int packetNumberSelected = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
 
+
+                    if(dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()) {
+                        int startingPacketNumber = Integer.parseInt(dashboard.
+                                getDashboardMenuBar().
+                                getViewMenu().
+                                getDetailFrameAuthenticator().
+                                getDetailFrame().
+                                getTable().
+                                getValueAt(0,0).toString());
+                        if (startingPacketNumber <= packetNumberSelected) {
+                            //temporarily turn off other tables listener to avoid infinite loop
+                            dashboard.getDashboardMenuBar().
+                                    getViewMenu().getDetailFrameAuthenticator().
+                                    getDetailFrame().setSuppressListener(true);
+                            //setting selection
+                            dashboard.getDashboardMenuBar().
+                                    getViewMenu().
+                                    getDetailFrameAuthenticator().
+                                    getDetailFrame().
+                                    getTable().setRowSelectionInterval(packetNumberSelected - startingPacketNumber, packetNumberSelected - startingPacketNumber);
+
+                            dashboard.getDashboardMenuBar().
+                                    getViewMenu().getDetailFrameAuthenticator().
+                                    getDetailFrame().setSuppressListener(false);
+                        }
+                    }
+
+
+
+
+                    dashboard.setSelectedPacket(dashboard.findPacket(packetNumberSelected));
+                    System.out.println(dashboard.getSelectedPacket());
 
                 }
             }
@@ -60,6 +98,20 @@ public class PacketsDisplayPanel extends JPanel {
 
         this.add(packetsDisplayScrollPanel, BorderLayout.NORTH);
 
+    }
+
+
+    public JTable getTable() {
+        return table;
+    }
+    public boolean getSuppressListener() {
+        return supressListener;
+    }
+
+
+
+    public void setSuppressListener(boolean suppressListener) {
+        this.supressListener = suppressListener;
     }
 
     public void addRowToDisplayPanel(IdentifiedPacket identifiedPacket) {

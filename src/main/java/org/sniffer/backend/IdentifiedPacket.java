@@ -83,6 +83,16 @@ public class IdentifiedPacket {
         return str.startsWith("GET") || str.startsWith("POST") || str.startsWith("HTTP");
     }
 
+    public Packet getLowestPacket() {
+        Packet current = rawPacket;
+
+        while (current.getPayload() != null) {
+            current = current.getPayload();
+        }
+
+        return current;
+    }
+
 
 
     //getters
@@ -110,6 +120,8 @@ public class IdentifiedPacket {
     public String getDstPort() {
         return dstPort;
     }
+
+
 
 
 }

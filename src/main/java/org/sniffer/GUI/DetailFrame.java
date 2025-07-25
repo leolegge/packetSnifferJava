@@ -8,7 +8,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-//TODO when a new source to sniff is selected if this is open then clear the table
 
 public class DetailFrame extends JFrame {
 
@@ -16,6 +15,7 @@ public class DetailFrame extends JFrame {
     private final String[] PACKET_COLUMNS_NAMES = {"Packet Number", "Source", "Destination","Port source", "Port destination" ,"Protocol","Exact Protocol","Length"};
 
 
+    private boolean suppressListener = false;
     DefaultTableModel mainDetailedPacketTable;
     JTable table;
 
@@ -28,13 +28,60 @@ public class DetailFrame extends JFrame {
         this.setLocationRelativeTo(dashboard);
         this.setVisible(true);
 
-        mainDetailedPacketTable = new DefaultTableModel(PACKET_COLUMNS_NAMES, 0);
+        mainDetailedPacketTable = new DefaultTableModel(PACKET_COLUMNS_NAMES, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;  // prevents editing
+            }
+        };
         table = new JTable(mainDetailedPacketTable);
+        table.setRowSelectionAllowed(true);
         packetsDisplayScrollPanel = new DetailedPacketsDisplayScrollPanel(table);
 
         this.add(packetsDisplayScrollPanel, BorderLayout.CENTER);
 
+        ListSelectionModel mainDetailedPacketTableSelectionModel = table.getSelectionModel();
+
+        mainDetailedPacketTableSelectionModel.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && !suppressListener) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    int packetNumberSelected = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+                    //temporarily turn off other tables listener to avoid infinite loop
+                    dashboard.getDashboardPacketPanelsWrapper().
+                            getPacketsDisplayPanel().setSuppressListener(true);
+                    dashboard.getDashboardPacketPanelsWrapper().
+                            getPacketsDisplayPanel().
+                            getTable().
+                            setRowSelectionInterval(packetNumberSelected-1, packetNumberSelected-1);
+                    dashboard.getDashboardPacketPanelsWrapper().
+                            getPacketsDisplayPanel().setSuppressListener(false);
+
+
+
+                    dashboard.setSelectedPacket(dashboard.findPacket(packetNumberSelected));
+                    System.out.println(dashboard.getSelectedPacket());
+
+                }
+            }
+        });
+
+
     }
+    //getters
+    public JTable getTable() {
+        return table;
+    }
+    public boolean getSuppressListener() {
+        return suppressListener;
+    }
+
+    //setters
+    public void setSuppressListener(boolean suppressListener) {
+        this.suppressListener = suppressListener;
+    }
+
+
 
 
 
@@ -45,7 +92,9 @@ public class DetailFrame extends JFrame {
                 identifiedPacket.getDstIp(),
                 identifiedPacket.getSrcPort(),
                 identifiedPacket.getDstPort(),
-                identifiedPacket.getProtocol()});
+                identifiedPacket.getProtocol(),
+                identifiedPacket.getLowestPacket().getClass().getSimpleName().replace("Packet", ""),
+                identifiedPacket.getPacket().length()});
 
 
         //TODO make this so it only does this if the user isn't looking at a packet not sure if possible

@@ -23,8 +23,6 @@ public class PacketsDisplayPanel extends JPanel {
             "length (bytes)",
             "timestamp",};
 
-    //TODO this allows us to add rows to the table hopefully the program can deal with the amount of data
-    //TODO add a listener handler to choose what data to send to the information panel when the table is pressed on
 
     DefaultTableModel mainPacketTable;
     JTable table;
@@ -49,10 +47,7 @@ public class PacketsDisplayPanel extends JPanel {
             if (!e.getValueIsAdjusting() && !supressListener) {
                 int selectedRow = table.getSelectedRow();
                 if (selectedRow != -1) {
-                    //TODO can make a object from this or push to the PacketInfomationPanel
-                    //TODO set this to the same row on the other table when clicked on
                     int packetNumberSelected = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
-
 
                     if(dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()) {
                         int startingPacketNumber = Integer.parseInt(dashboard.
@@ -72,7 +67,8 @@ public class PacketsDisplayPanel extends JPanel {
                                     getViewMenu().
                                     getDetailFrameAuthenticator().
                                     getDetailFrame().
-                                    getTable().setRowSelectionInterval(packetNumberSelected - startingPacketNumber, packetNumberSelected - startingPacketNumber);
+                                    getTable().setRowSelectionInterval(packetNumberSelected - startingPacketNumber,
+                                            packetNumberSelected - startingPacketNumber);
 
                             dashboard.getDashboardMenuBar().
                                     getViewMenu().getDetailFrameAuthenticator().

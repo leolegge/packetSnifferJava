@@ -59,8 +59,12 @@ public class DetailFrame extends JFrame {
 
 
 
+
+
                     dashboard.setSelectedPacket(dashboard.findPacket(packetNumberSelected));
                     System.out.println(dashboard.getSelectedPacket());
+
+
 
                 }
             }

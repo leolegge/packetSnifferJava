@@ -2,6 +2,7 @@ package org.sniffer.GUI;
 
 import org.pcap4j.core.PcapNativeException;
 import org.sniffer.GUI.menus.EditMenu;
+import org.sniffer.GUI.menus.FileMenu;
 import org.sniffer.GUI.menus.SelectNetworkMenu;
 import org.sniffer.GUI.menus.ViewMenu;
 
@@ -17,6 +18,7 @@ public class SnifferMenuBar extends JMenuBar {
     private SelectNetworkMenu networkMenu;
     private EditMenu editMenu = new EditMenu();
     private ViewMenu viewMenu;
+    private FileMenu fileMenu;
 
 
 
@@ -33,11 +35,14 @@ public class SnifferMenuBar extends JMenuBar {
 
         networkMenu = new SelectNetworkMenu(this.dashboard);
         viewMenu = new ViewMenu(this.dashboard);
+        fileMenu = new FileMenu(this.dashboard);
 
         //Adding menus to the menu bar
         this.add(networkMenu);
+        this.add(fileMenu);
         this.add(editMenu);
         this.add(viewMenu);
+
 
 
     }

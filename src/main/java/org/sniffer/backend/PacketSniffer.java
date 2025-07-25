@@ -1,5 +1,6 @@
 package org.sniffer.backend;
 
+import org.pcap4j.core.PcapDumper;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.packet.Packet;
@@ -7,11 +8,7 @@ import org.sniffer.GUI.SnifferDashboard;
 
 import java.sql.Timestamp;
 
-//TODO write straight to JTables from this class when running
 //TODO also use a dumper to save the current capture
-
-//TODO make it so the tables reset upon choosing to sniff a new network
-
 
 public class PacketSniffer implements Runnable {
 
@@ -19,6 +16,7 @@ public class PacketSniffer implements Runnable {
 
     PcapNetworkInterface networkInterface;
     PcapNetworkInterface.PromiscuousMode promiscuousMode;
+    PcapDumper dumper;
     private boolean running = true;
 
 
@@ -42,6 +40,7 @@ public class PacketSniffer implements Runnable {
             );
 
             System.out.println("Started sniffing on " + networkInterface.getName());
+            dumper = handle.dumpOpen("temp.pcap");
             while (running) {
 
                 Packet packet = handle.getNextPacket();
@@ -50,6 +49,8 @@ public class PacketSniffer implements Runnable {
                     packetNumber++;
                     //System.out.println("Packet " + packetNumber + " " + packet.getHeader());
                     dashboard.addSharedPacket(packet);
+
+                    dumper.dump(packet, timestamp);
 
                     IdentifiedPacket identifiedPacket = new IdentifiedPacket(packet, timestamp, packetNumber);
 
@@ -69,7 +70,7 @@ public class PacketSniffer implements Runnable {
                     }
                 }
             }
-
+            dumper.close();
             handle.close();
         } catch (Exception e) {
             e.printStackTrace();

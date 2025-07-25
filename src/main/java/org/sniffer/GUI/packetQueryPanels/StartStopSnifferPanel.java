@@ -37,6 +37,9 @@ public class StartStopSnifferPanel extends JPanel {
                 dashboard.setSnifferThread(new Thread(dashboard.getPacketSniffer()));
                 dashboard.setSharedPacketList(Collections.synchronizedList(new ArrayList<>()));
                 dashboard.startSniffer();
+
+                dashboard.getDashboardMenuBar().getFileMenu().getSaveButton().setEnabled(false);
+                dashboard.getDashboardMenuBar().getFileMenu().getOpenButton().setEnabled(false);
             }
         });
 
@@ -47,6 +50,9 @@ public class StartStopSnifferPanel extends JPanel {
 
                 dashboard.getDashboardMenuBar().getNetworkMenu().enableRadioButtons();
                 dashboard.stopSniffer();
+
+                dashboard.getDashboardMenuBar().getFileMenu().getSaveButton().setEnabled(true);
+                dashboard.getDashboardMenuBar().getFileMenu().getOpenButton().setEnabled(true);
 
             }
         });

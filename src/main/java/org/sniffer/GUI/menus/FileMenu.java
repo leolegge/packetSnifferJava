@@ -1,10 +1,15 @@
 package org.sniffer.GUI.menus;
 
+import org.pcap4j.core.PcapDumper;
+import org.pcap4j.core.PcapHandle;
+import org.pcap4j.core.Pcaps;
 import org.sniffer.GUI.SnifferDashboard;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class FileMenu extends JMenu {
    private SnifferDashboard dashboard;
@@ -25,6 +30,28 @@ public class FileMenu extends JMenu {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //TODO add save functionality
+
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Save capture as...");
+                fileChooser.setFileFilter(new FileNameExtensionFilter("PCAP files", "pcap"));
+
+                int option = fileChooser.showSaveDialog(null);
+
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+
+                    // Ensure .pcap extension
+                    if (!file.getName().toLowerCase().endsWith(".pcap")) {
+                        file = new File(file.getAbsolutePath() + ".pcap");
+                    }
+
+                    //TODO get this working
+
+                    //PcapHandle deadHandle = Pcaps.openDead(LinkType.ETHERNET, 65536);
+                    //PcapDumper newDumper = deadHandle.dumpOpen(file.getAbsolutePath());
+
+
+                }
             }
         });
 
@@ -34,6 +61,17 @@ public class FileMenu extends JMenu {
             }
         });
 
+        saveButton.setEnabled(false);
+        openButton.setEnabled(false);
+
+    }
+
+    public JButton getSaveButton() {
+        return saveButton;
+    }
+
+    public JButton getOpenButton() {
+        return openButton;
     }
 
 

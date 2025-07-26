@@ -88,8 +88,6 @@ public class SelectNetworkMenu extends JMenu {
 
                 }
             });
-
-
         }
     }
 
@@ -112,6 +110,11 @@ public class SelectNetworkMenu extends JMenu {
         for (JRadioButtonMenuItem item : networkItems) {
             item.setEnabled(true);
         }
+    }
+
+
+    public void unselectRadioButtons(){
+        networkGroup.clearSelection();
     }
 
 

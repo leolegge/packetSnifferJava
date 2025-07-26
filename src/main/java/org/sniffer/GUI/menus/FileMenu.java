@@ -3,6 +3,7 @@ package org.sniffer.GUI.menus;
 import org.pcap4j.core.PcapDumper;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.Pcaps;
+import org.pcap4j.packet.Packet;
 import org.sniffer.GUI.SnifferDashboard;
 
 import javax.swing.*;
@@ -50,8 +51,6 @@ public class FileMenu extends JMenu {
                         file = new File(file.getAbsolutePath() + ".pcap");
                     }
 
-                    //TODO get this working
-
                     try {
                         Files.copy(Paths.get("temp.pcap"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     } catch (IOException ex) {
@@ -67,12 +66,40 @@ public class FileMenu extends JMenu {
 
         openButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //TODO add loading functionality
+
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Open a .pcap file");
+                fileChooser.setFileFilter(new FileNameExtensionFilter("PCAP files", "pcap"));
+
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+
+                    dashboard.getDashboardMenuBar().getNetworkMenu().unselectRadioButtons();
+
+                    //Loading file here
+                    try (PcapHandle handle = Pcaps.openOffline(file.getAbsolutePath())) {
+                        System.out.println("Opened: " + file.getAbsolutePath());
+
+                        Packet packet;
+                        while ((packet = handle.getNextPacket()) != null) {
+                            System.out.println("Timestamp: " + handle.getTimestamp());
+                            System.out.println("Packet: " + packet);
+                        }
+
+                        System.out.println("Finished reading.");
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Failed to open pcap: " + ex.getMessage());
+                    }
+
+
+                }
             }
         });
 
         saveButton.setEnabled(false);
-        openButton.setEnabled(false);
+        openButton.setEnabled(true);
 
     }
 

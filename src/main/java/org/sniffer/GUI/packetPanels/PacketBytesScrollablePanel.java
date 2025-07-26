@@ -5,7 +5,7 @@ import javax.swing.*;
 public class PacketBytesScrollablePanel extends JScrollPane {
 
 
-    public PacketBytesScrollablePanel(JTextPane textPane) {
-        super(textPane);
+    public PacketBytesScrollablePanel(JTextArea textArea) {
+        super(textArea);
     }
 }

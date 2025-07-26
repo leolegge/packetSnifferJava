@@ -141,21 +141,4 @@ public class SnifferDashboard extends JFrame {
             return sharedPacketList.get(packetNumber-1);
         }
     }
-
-
-    /// //////////////////TEST FUNCTION
-    public void printAllLayers(Packet packet) {
-        Packet current = packet;
-        int layer = 1;
-
-        while (current != null) {
-            System.out.println("Layer " + layer + ": " + current.getClass().getSimpleName());
-            System.out.println(current); // or current.getHeader() for just header info
-            current = current.getPayload(); // go to next inner layer
-            layer++;
-        }
-    }
-
-    /// //////////////////////////////
-
 }

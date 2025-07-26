@@ -54,16 +54,4 @@ public class ExpandablePanel extends JPanel {
 
 
     }
-
-    @Override
-    public Dimension getPreferredSize() {
-        if (expanded) {
-            // When expanded, use normal preferred size (header + content)
-            return super.getPreferredSize();
-        } else {
-            // When collapsed, only show header (expand button + label)
-            Dimension headerSize = expandableTitle.getPreferredSize();
-            return new Dimension(headerSize.width, headerSize.height);
-        }
-    }
 }

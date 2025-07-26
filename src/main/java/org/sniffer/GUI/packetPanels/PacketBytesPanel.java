@@ -10,7 +10,7 @@ public class PacketBytesPanel extends JPanel {
 
     PacketBytesScrollablePanel packetBytesScrollablePanel;
 
-    JTextPane bytesPane;
+    JTextArea bytesArea;
 
     public PacketBytesPanel() {
         this.setLayout(new BorderLayout());
@@ -21,13 +21,14 @@ public class PacketBytesPanel extends JPanel {
     //TODO make this correctly display byte data onto the screen
     public void setBytesPage(Packet packet){
 
-        bytesPane = new JTextPane();
-        bytesPane.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        bytesPane.setEditable(false);
-        StyledDocument doc = bytesPane.getStyledDocument();
+        bytesArea = new JTextArea();
+        bytesArea.setEditable(false);
+        bytesArea.setLineWrap(true);
+        bytesArea.setWrapStyleWord(true);
 
 
 
-        this.packetBytesScrollablePanel = new PacketBytesScrollablePanel(bytesPane);
+
+        this.packetBytesScrollablePanel = new PacketBytesScrollablePanel(bytesArea);
     }
 }

@@ -10,6 +10,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 
 public class FileMenu extends JMenu {
    private SnifferDashboard dashboard;
@@ -47,8 +52,13 @@ public class FileMenu extends JMenu {
 
                     //TODO get this working
 
-                    //PcapHandle deadHandle = Pcaps.openDead(LinkType.ETHERNET, 65536);
-                    //PcapDumper newDumper = deadHandle.dumpOpen(file.getAbsolutePath());
+                    try {
+                        Files.copy(Paths.get("temp.pcap"), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    new File("temp.pcap").delete();
 
 
                 }

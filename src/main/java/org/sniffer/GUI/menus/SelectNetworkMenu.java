@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.EOFException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -65,7 +66,10 @@ public class SelectNetworkMenu extends JMenu {
                             PcapNetworkInterface.PromiscuousMode.PROMISCUOUS));
                     dashboard.setSnifferThread(new Thread(dashboard.getPacketSniffer()));
 
+
                     dashboard.getDashboardPacketPanelsWrapper().getPacketsDisplayPanel().resetTable();
+
+
                     //If a detail frame is on the screen then reset when new network is selected
                     if(dashboard.getDashboardMenuBar().
                             getViewMenu().
@@ -79,8 +83,13 @@ public class SelectNetworkMenu extends JMenu {
                                 resetMainDetailedPacketTable();
                     }
 
+                    //If a new source is being sniffed delete the old temp file
+                    new File("temp.pcap").delete();
+
                 }
             });
+
+
         }
     }
 

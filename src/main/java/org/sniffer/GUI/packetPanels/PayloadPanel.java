@@ -1,6 +1,7 @@
 package org.sniffer.GUI.packetPanels;
 
 import org.pcap4j.packet.Packet;
+import org.sniffer.GUI.SnifferDashboard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,18 +21,23 @@ public class PayloadPanel extends JPanel {
 
     }
 
-    public void setUpPayloadPanel(Packet packet, int layerCount) {
+    public void setUpPayloadPanel(Packet packet, SnifferDashboard dashboard) {
 
         layersContainer.removeAll();
         Packet current = packet;
         int layer = 1;
 
         while (current != null) {
-            ExpandablePanel newPanel = new ExpandablePanel("Layer " + layer + ": " + current.getClass().getSimpleName(), current.toString());
+            String headerText = (current.getHeader() != null)
+                    ? current.getHeader().toString()
+                    : "[No Header Available]";
+            ExpandablePanel newPanel =
+                    new ExpandablePanel("Layer " + layer + ": " + current.getClass().getSimpleName(),
+                            headerText, dashboard);
             newPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
             newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, newPanel.getPreferredSize().height));
             layersContainer.add(newPanel);
-            current = current.getPayload(); // go to next inner layer
+            current = current.getPayload();
             layer++;
         }
 
@@ -48,6 +54,11 @@ public class PayloadPanel extends JPanel {
             layers++;
         }
         return layers;
+    }
+
+    //getters
+    public JPanel getLayersContainer() {
+        return layersContainer;
     }
 
 }

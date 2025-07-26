@@ -82,13 +82,10 @@ public class PacketsDisplayPanel extends JPanel {
                     dashboard.setSelectedPacket(dashboard.findPacket(packetNumberSelected));
                     System.out.println(dashboard.getSelectedPacket());
 
-                    int layers = dashboard.getDashboardPacketPanelsWrapper().
-                            getPacketInformationPanel().
-                            getPayloadPanel().findPacketLayersCount(dashboard.getSelectedPacket());
                     dashboard.getDashboardPacketPanelsWrapper().
                             getPacketInformationPanel().
                             getPayloadPanel().
-                            setUpPayloadPanel(dashboard.getSelectedPacket(), layers);
+                            setUpPayloadPanel(dashboard.getSelectedPacket(), dashboard);
 
 
 

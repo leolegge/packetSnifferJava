@@ -16,7 +16,7 @@ public class SnifferMenuBar extends JMenuBar {
     private SnifferDashboard dashboard;
 
     private SelectNetworkMenu networkMenu;
-    private EditMenu editMenu = new EditMenu();
+    private EditMenu editMenu;
     private ViewMenu viewMenu;
     private FileMenu fileMenu;
 
@@ -36,6 +36,7 @@ public class SnifferMenuBar extends JMenuBar {
         networkMenu = new SelectNetworkMenu(this.dashboard);
         viewMenu = new ViewMenu(this.dashboard);
         fileMenu = new FileMenu(this.dashboard);
+        editMenu = new EditMenu(this.dashboard);
 
         //Adding menus to the menu bar
         this.add(networkMenu);

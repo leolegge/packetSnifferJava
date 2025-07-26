@@ -1,10 +1,9 @@
 package org.sniffer.GUI.menus;
 
-import org.pcap4j.core.PcapDumper;
-import org.pcap4j.core.PcapHandle;
-import org.pcap4j.core.Pcaps;
+import org.pcap4j.core.*;
 import org.pcap4j.packet.Packet;
 import org.sniffer.GUI.SnifferDashboard;
+import org.sniffer.backend.IdentifiedPacket;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -76,21 +75,48 @@ public class FileMenu extends JMenu {
                     File file = fileChooser.getSelectedFile();
 
                     dashboard.getDashboardMenuBar().getNetworkMenu().unselectRadioButtons();
-
+                    dashboard.getDashboardPacketPanelsWrapper().getPacketsDisplayPanel().resetTable();
+                    if(dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()) {
+                        dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().
+                                getDetailFrame().resetMainDetailedPacketTable();
+                    }
                     //Loading file here
                     try (PcapHandle handle = Pcaps.openOffline(file.getAbsolutePath())) {
-                        System.out.println("Opened: " + file.getAbsolutePath());
-
                         Packet packet;
+                        int packetNumber = 0;
                         while ((packet = handle.getNextPacket()) != null) {
+                            packetNumber++;
                             System.out.println("Timestamp: " + handle.getTimestamp());
                             System.out.println("Packet: " + packet);
+                            //load each packet into table
+                            //Everything need to be set up as if a network has been selected
+
+                            dashboard.addSharedPacket(packet);
+
+                            IdentifiedPacket identifiedPacket = new IdentifiedPacket(packet, handle.getTimestamp(), packetNumber);
+
+                            //Writing to the general packet frame
+                            dashboard.getDashboardPacketPanelsWrapper()
+                                    .getPacketsDisplayPanel()
+                                    .addRowToDisplayPanel(identifiedPacket);
+
+
+                            //Writing onto the Detail frame
+                            if(dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()){
+                                dashboard.getDashboardMenuBar().
+                                        getViewMenu().
+                                        getDetailFrameAuthenticator().
+                                        getDetailFrame().
+                                        addRowToTable(identifiedPacket);
+                            }
+
+
                         }
 
-                        System.out.println("Finished reading.");
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Failed to open pcap: " + ex.getMessage());
+                    } catch (PcapNativeException ex) {
+                        JOptionPane.showMessageDialog(null, "Failed to start pcap: " + ex.getMessage());
+                    } catch(NotOpenException ex){
+                        JOptionPane.showMessageDialog(null, "Failed to open pcap correctly: " + ex.getMessage());
                     }
 
 

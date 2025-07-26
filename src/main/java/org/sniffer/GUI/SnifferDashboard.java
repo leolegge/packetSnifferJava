@@ -27,7 +27,7 @@ public class SnifferDashboard extends JFrame {
     private PacketPanelsWrapper packetPanelsWrapper;
 
 
-    private List<Packet> sharedPacketList;
+    private List<Packet> sharedPacketList = Collections.synchronizedList(new ArrayList<>());
     private Packet selectedPacket = null;
 
 

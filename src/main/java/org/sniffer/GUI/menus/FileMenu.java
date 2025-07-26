@@ -80,6 +80,9 @@ public class FileMenu extends JMenu {
                         dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().
                                 getDetailFrame().resetMainDetailedPacketTable();
                     }
+                    dashboard.getDashboardMenuBar().getFileMenu().getSaveButton().setEnabled(false);
+
+
                     //Loading file here
                     try (PcapHandle handle = Pcaps.openOffline(file.getAbsolutePath())) {
                         Packet packet;

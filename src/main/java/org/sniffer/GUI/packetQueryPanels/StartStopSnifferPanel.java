@@ -40,6 +40,7 @@ public class StartStopSnifferPanel extends JPanel {
 
                 dashboard.getDashboardMenuBar().getFileMenu().getSaveButton().setEnabled(false);
                 dashboard.getDashboardMenuBar().getFileMenu().getOpenButton().setEnabled(false);
+                dashboard.getDashboardMenuBar().getFileMenu().getSaveButton().setEnabled(false);
             }
         });
 
@@ -53,6 +54,7 @@ public class StartStopSnifferPanel extends JPanel {
 
                 dashboard.getDashboardMenuBar().getFileMenu().getSaveButton().setEnabled(true);
                 dashboard.getDashboardMenuBar().getFileMenu().getOpenButton().setEnabled(true);
+                dashboard.getDashboardMenuBar().getFileMenu().getSaveButton().setEnabled(true);
 
             }
         });

@@ -25,4 +25,13 @@ public class PacketInformationPanel extends JPanel {
         this.add(payloadPanel);
 
     }
+
+
+    //getters
+    public PacketBytesPanel getPacketBytesPanel() {
+        return packetBytesPanel;
+    }
+    public PayloadPanel getPayloadPanel() {
+        return payloadPanel;
+    }
 }

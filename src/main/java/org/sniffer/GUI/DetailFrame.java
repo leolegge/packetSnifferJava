@@ -63,6 +63,13 @@ public class DetailFrame extends JFrame {
 
                     dashboard.setSelectedPacket(dashboard.findPacket(packetNumberSelected));
                     System.out.println(dashboard.getSelectedPacket());
+                    int layers = dashboard.getDashboardPacketPanelsWrapper().
+                            getPacketInformationPanel().
+                            getPayloadPanel().findPacketLayersCount(dashboard.getSelectedPacket());
+                    dashboard.getDashboardPacketPanelsWrapper().
+                            getPacketInformationPanel().
+                            getPayloadPanel().
+                            setUpPayloadPanel(dashboard.getSelectedPacket(), layers);
 
 
 

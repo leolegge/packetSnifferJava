@@ -19,11 +19,13 @@ public class PacketQueryPanel extends JPanel {
     private SnifferDashboard dashboard;
 
     private final JTextField queryField = new JTextField();
-    private final FilterButtonPanel filterButtonPanel = new FilterButtonPanel();
+    private final FilterButtonPanel filterButtonPanel;
     private final StartStopSnifferPanel startStopSnifferPanel;
 
     public PacketQueryPanel(SnifferDashboard dashboard) {
         this.dashboard = dashboard;
+        //setting up filter buttons
+        filterButtonPanel = new FilterButtonPanel(dashboard);
         //setting up start stop buttons
         startStopSnifferPanel = new StartStopSnifferPanel(dashboard);
 
@@ -63,6 +65,11 @@ public class PacketQueryPanel extends JPanel {
     }
     public SnifferDashboard getSnifferDashboard() {
         return dashboard;
+    }
+
+    //general methods
+    public void resetQueryField(){
+        queryField.setText("");
     }
 
 

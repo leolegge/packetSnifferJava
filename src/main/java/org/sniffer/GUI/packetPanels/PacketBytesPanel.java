@@ -14,21 +14,38 @@ public class PacketBytesPanel extends JPanel {
 
     public PacketBytesPanel() {
         this.setLayout(new BorderLayout());
-        this.setBackground(Color.GREEN);
+        bytesArea = new JTextArea();
+        bytesArea.setEditable(false);
+        bytesArea.setLineWrap(true);
+        bytesArea.setWrapStyleWord(true);
+        bytesArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+        this.packetBytesScrollablePanel = new PacketBytesScrollablePanel(bytesArea);
+        this.add(packetBytesScrollablePanel, BorderLayout.CENTER);
+
 
     }
 
     //TODO make this correctly display byte data onto the screen
     public void setBytesPage(Packet packet){
+        bytesArea.removeAll();
 
-        bytesArea = new JTextArea();
-        bytesArea.setEditable(false);
-        bytesArea.setLineWrap(true);
-        bytesArea.setWrapStyleWord(true);
+        byte[] rawData = packet.getRawData();
 
+        StringBuilder hexBuilder = new StringBuilder();
 
+        for (int i = 0; i < rawData.length; i++) {
+            if (i % 16 == 0) {
+                hexBuilder.append(String.format("%04X: ", i)); // offset
+            }
 
+            hexBuilder.append(String.format("%02X ", rawData[i]));
 
-        this.packetBytesScrollablePanel = new PacketBytesScrollablePanel(bytesArea);
+            if ((i + 1) % 16 == 0 || i == rawData.length - 1) {
+                hexBuilder.append("\n");
+            }
+        }
+
+        bytesArea.setText(hexBuilder.toString());
+
     }
 }

@@ -20,6 +20,15 @@ public enum QueryOptions {
         throw new InvalidQueryOption("Invalid entry");
     }
 
+    public static boolean validateQueryOption(String querySubString) {
+        for (QueryOptions queryOption : QueryOptions.values()) {
+            if(querySubString.toUpperCase().equals(queryOption.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 }

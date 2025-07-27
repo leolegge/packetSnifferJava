@@ -94,9 +94,10 @@ public class FileMenu extends JMenu {
                             //load each packet into table
                             //Everything need to be set up as if a network has been selected
 
-                            dashboard.addSharedPacket(packet);
-
                             IdentifiedPacket identifiedPacket = new IdentifiedPacket(packet, handle.getTimestamp(), packetNumber);
+                            dashboard.addSharedPacket(identifiedPacket);
+
+
 
                             //Writing to the general packet frame
                             dashboard.getDashboardPacketPanelsWrapper()

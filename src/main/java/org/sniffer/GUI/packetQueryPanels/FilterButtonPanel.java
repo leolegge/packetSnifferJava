@@ -2,10 +2,7 @@ package org.sniffer.GUI.packetQueryPanels;
 
 import org.pcap4j.packet.Packet;
 import org.sniffer.GUI.SnifferDashboard;
-import org.sniffer.backend.InvalidQueryOption;
-import org.sniffer.backend.Query;
-import org.sniffer.backend.QueryOptions;
-import org.sniffer.backend.SubQuery;
+import org.sniffer.backend.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,7 +64,9 @@ public class FilterButtonPanel extends JPanel {
                 dashboard.getDashboardPacketPanelsWrapper().getPacketsDisplayPanel().resetTable();
 
                 //Going through shared packets list to write all packets that fit the filter onto screen
-                for(Packet currentPacket : dashboard.getSharedPacketList()){
+                for(IdentifiedPacket currentPacket : dashboard.getSharedPacketList()){
+                    //Now for this packet check if that packet is valid
+
 
                 }
 

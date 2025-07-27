@@ -47,12 +47,12 @@ public class PacketSniffer implements Runnable {
                 Timestamp timestamp = handle.getTimestamp();
                 if (packet != null) {
                     packetNumber++;
-                    //System.out.println("Packet " + packetNumber + " " + packet.getHeader());
-                    dashboard.addSharedPacket(packet);
+                    IdentifiedPacket identifiedPacket = new IdentifiedPacket(packet, timestamp, packetNumber);
+                    dashboard.addSharedPacket(identifiedPacket);
 
                     dumper.dump(packet, timestamp);
 
-                    IdentifiedPacket identifiedPacket = new IdentifiedPacket(packet, timestamp, packetNumber);
+
 
                     //Writing to the general packet frame
                     dashboard.getDashboardPacketPanelsWrapper()

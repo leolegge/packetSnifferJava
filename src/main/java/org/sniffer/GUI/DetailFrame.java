@@ -65,11 +65,11 @@ public class DetailFrame extends JFrame {
                     dashboard.getDashboardPacketPanelsWrapper().
                             getPacketInformationPanel().
                             getPayloadPanel().
-                            setUpPayloadPanel(dashboard.getSelectedPacket(), dashboard);
+                            setUpPayloadPanel(dashboard.getSelectedPacket().getPacket(), dashboard);
                     dashboard.getDashboardPacketPanelsWrapper().
                             getPacketInformationPanel().
                             getPacketBytesPanel().
-                            setBytesPage(dashboard.getSelectedPacket());
+                            setBytesPage(dashboard.getSelectedPacket().getPacket());
 
                 }
             }

@@ -3,6 +3,7 @@ package org.sniffer.GUI;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.packet.Packet;
+import org.sniffer.backend.IdentifiedPacket;
 import org.sniffer.backend.PacketSniffer;
 import org.sniffer.backend.Query;
 
@@ -12,9 +13,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-//TODO add saving and loading using Pcap dump this is to be implemented after packets can be pushed to both Detail frame
-//TODO and the main frame
 
 
 /**
@@ -28,8 +26,8 @@ public class SnifferDashboard extends JFrame {
     private PacketPanelsWrapper packetPanelsWrapper;
 
 
-    private List<Packet> sharedPacketList = Collections.synchronizedList(new ArrayList<>());
-    private Packet selectedPacket = null;
+    private List<IdentifiedPacket> sharedPacketList = Collections.synchronizedList(new ArrayList<>());
+    private IdentifiedPacket selectedPacket = null;
 
 
     private PacketSniffer packetSniffer;
@@ -95,12 +93,12 @@ public class SnifferDashboard extends JFrame {
     public Thread getSnifferThread(){
         return snifferThread;
     }
-    public List<Packet> getSharedPacketList() {
+    public List<IdentifiedPacket> getSharedPacketList() {
         synchronized (sharedPacketList) {
             return sharedPacketList;
         }
     }
-    public Packet getSelectedPacket(){
+    public IdentifiedPacket getSelectedPacket(){
         return selectedPacket;
     }
 
@@ -118,10 +116,10 @@ public class SnifferDashboard extends JFrame {
     public void setSnifferThread(Thread snifferThread) {
         this.snifferThread = snifferThread;
     }
-    public void setSharedPacketList(List<Packet> sharedPacketList) {
+    public void setSharedPacketList(List<IdentifiedPacket> sharedPacketList) {
         this.sharedPacketList = sharedPacketList;
     }
-    public void setSelectedPacket(Packet selectedPacket) {
+    public void setSelectedPacket(IdentifiedPacket selectedPacket) {
         this.selectedPacket = selectedPacket;
     }
     public void setQuery(Query query) {
@@ -138,11 +136,11 @@ public class SnifferDashboard extends JFrame {
         packetSniffer.setRunning(false);
     }
 
-    public void addSharedPacket(Packet packet) {
+    public void addSharedPacket(IdentifiedPacket packet) {
         sharedPacketList.add(packet);
     }
 
-    public Packet findPacket(int packetNumber){
+    public IdentifiedPacket findPacket(int packetNumber){
         synchronized (sharedPacketList) {
             return sharedPacketList.get(packetNumber-1);
         }

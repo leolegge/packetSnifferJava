@@ -5,6 +5,7 @@ import org.sniffer.GUI.menus.EditMenu;
 import org.sniffer.GUI.menus.FileMenu;
 import org.sniffer.GUI.menus.SelectNetworkMenu;
 import org.sniffer.GUI.menus.ViewMenu;
+import org.sniffer.backend.Query;
 
 import javax.swing.*;
 
@@ -19,6 +20,8 @@ public class SnifferMenuBar extends JMenuBar {
     private EditMenu editMenu;
     private ViewMenu viewMenu;
     private FileMenu fileMenu;
+
+    private Query currentQuery;
 
 
 

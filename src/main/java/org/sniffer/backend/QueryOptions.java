@@ -6,18 +6,22 @@ public enum QueryOptions {
     ARP,
     UDP,
     DNS,
+    HTTP,
     UNKNOWN;
 
 
 
-    public QueryOptions translateToQueryOption(String querySubString) {
+    public static QueryOptions translateToQueryOption(String querySubString) throws InvalidQueryOption {
         for (QueryOptions queryOption : QueryOptions.values()) {
             if(querySubString.toUpperCase().equals(queryOption.toString())) {
                 return queryOption;
             }
         }
-        return null;
+        throw new InvalidQueryOption("Invalid entry");
     }
+
+
+
 }
 
 

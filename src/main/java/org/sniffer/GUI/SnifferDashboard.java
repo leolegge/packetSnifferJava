@@ -4,6 +4,7 @@ import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.packet.Packet;
 import org.sniffer.backend.PacketSniffer;
+import org.sniffer.backend.Query;
 
 
 import javax.swing.*;
@@ -33,6 +34,8 @@ public class SnifferDashboard extends JFrame {
 
     private PacketSniffer packetSniffer;
     private Thread snifferThread;
+
+    private Query currentQuery = null;
 
     private PcapNetworkInterface networkInterface = null;
 
@@ -120,6 +123,9 @@ public class SnifferDashboard extends JFrame {
     }
     public void setSelectedPacket(Packet selectedPacket) {
         this.selectedPacket = selectedPacket;
+    }
+    public void setQuery(Query query) {
+        this.currentQuery = query;
     }
 
     //general methods

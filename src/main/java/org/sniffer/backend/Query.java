@@ -14,7 +14,16 @@ public class Query {
 
     //general methods
     public void addSubQuery(SubQuery subQuery) {
-        subQueries.add(subQuery);
+        boolean exists = false;
+        for(SubQuery sq : subQueries) {
+            if (sq.getQueryOption().equals(subQuery.getQueryOption())) {
+                exists = true;
+                break;
+            }
+        }
+        if(!exists) {
+            subQueries.add(subQuery);
+        }
     }
 
 

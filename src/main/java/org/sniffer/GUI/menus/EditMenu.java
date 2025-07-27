@@ -19,7 +19,7 @@ public class EditMenu extends JMenu {
     public EditMenu(SnifferDashboard dashboard) {
         super("Edit");
         this.dashboard = dashboard;
-        this.add(clearPacketsDisplay);
+        //this.add(clearPacketsDisplay);
 
         clearPacketsDisplay.addActionListener(new AbstractAction() {
             public void actionPerformed(ActionEvent e) {

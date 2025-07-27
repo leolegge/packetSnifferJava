@@ -101,6 +101,9 @@ public class SnifferDashboard extends JFrame {
     public IdentifiedPacket getSelectedPacket(){
         return selectedPacket;
     }
+    public Query getCurrentQuery() {
+        return currentQuery;
+    }
 
 
 

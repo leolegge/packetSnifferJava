@@ -53,20 +53,43 @@ public class PacketSniffer implements Runnable {
                     dumper.dump(packet, timestamp);
 
 
+                    if(dashboard.getCurrentQuery() == null) {
+                        //Writing to the general packet frame
+                        dashboard.getDashboardPacketPanelsWrapper()
+                                .getPacketsDisplayPanel()
+                                .addRowToDisplayPanel(identifiedPacket);
 
-                    //Writing to the general packet frame
-                    dashboard.getDashboardPacketPanelsWrapper()
-                            .getPacketsDisplayPanel()
-                            .addRowToDisplayPanel(identifiedPacket);
+
+                        //Writing onto the Detail frame
+                        if (dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()) {
+                            dashboard.getDashboardMenuBar().
+                                    getViewMenu().
+                                    getDetailFrameAuthenticator().
+                                    getDetailFrame().
+                                    addRowToTable(identifiedPacket);
+                        }
+                    }else{
+                        for(SubQuery subQuery : dashboard.getCurrentQuery().getSubQueries()){
+                            if(subQuery.getQueryOption().equals(QueryOptions.translateToQueryOption(identifiedPacket.getProtocol()))){
+                                //Writing to the general packet frame
+                                dashboard.getDashboardPacketPanelsWrapper()
+                                        .getPacketsDisplayPanel()
+                                        .addRowToDisplayPanel(identifiedPacket);
 
 
-                    //Writing onto the Detail frame
-                    if(dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()){
-                        dashboard.getDashboardMenuBar().
-                                getViewMenu().
-                                getDetailFrameAuthenticator().
-                                getDetailFrame().
-                                addRowToTable(identifiedPacket);
+                                //Writing onto the Detail frame
+                                if (dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()) {
+                                    dashboard.getDashboardMenuBar().
+                                            getViewMenu().
+                                            getDetailFrameAuthenticator().
+                                            getDetailFrame().
+                                            addRowToTable(identifiedPacket);
+                                }
+                            }
+                        }
+
+
+
                     }
                 }
             }

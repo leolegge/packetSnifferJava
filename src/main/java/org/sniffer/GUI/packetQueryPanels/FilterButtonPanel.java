@@ -66,24 +66,49 @@ public class FilterButtonPanel extends JPanel {
                 //Going through shared packets list to write all packets that fit the filter onto screen
                 for(IdentifiedPacket currentPacket : dashboard.getSharedPacketList()){
                     //Now for this packet check if that packet is valid
-
-
+                    for(SubQuery subQuery : dashboard.getCurrentQuery().getSubQueries()){
+                        if(subQuery.getQueryOption().equals(QueryOptions.translateToQueryOption(currentPacket.getProtocol()))){
+                            dashboard.getDashboardPacketPanelsWrapper().
+                                    getPacketsDisplayPanel().
+                                    addRowToDisplayPanel(currentPacket);
+                        }
+                    }
                 }
-
-
-                //TODO parse this to delete all things on screen currently then go through the
-                //TODO shared list which need to be changed to accomodate IdentifiedPackets
-                //TODO then write the filtered packets to the dashboard
-
-
-
             }
         });
 
         clearFilterButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dashboard.getDashboardPacketQueryPanel().resetQueryField();
+                if (dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()){
+                    dashboard.getDashboardMenuBar().
+                            getViewMenu().
+                            getDetailFrameAuthenticator().
+                            getDetailFrame().
+                            resetMainDetailedPacketTable();
+                }
+
                 //TODO also reset some other methods here for how packets are filtered
+                dashboard.setQuery(null);
+
+                dashboard.getDashboardPacketPanelsWrapper().getPacketsDisplayPanel().resetTable();
+                for(IdentifiedPacket currentPacket : dashboard.getSharedPacketList()){
+                    //Writing to the general packet frame
+                    dashboard.getDashboardPacketPanelsWrapper()
+                            .getPacketsDisplayPanel()
+                            .addRowToDisplayPanel(currentPacket);
+
+
+                    //Writing onto the Detail frame
+                    if (dashboard.getDashboardMenuBar().getViewMenu().getDetailFrameAuthenticator().isAuthenticated()) {
+                        dashboard.getDashboardMenuBar().
+                                getViewMenu().
+                                getDetailFrameAuthenticator().
+                                getDetailFrame().
+                                addRowToTable(currentPacket);
+                    }
+                }
+
 
             }
         });

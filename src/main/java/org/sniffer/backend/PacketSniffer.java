@@ -8,37 +8,49 @@ import org.sniffer.GUI.SnifferDashboard;
 
 import java.sql.Timestamp;
 
-//TODO also use a dumper to save the current capture
 
+/**
+ * This is the packet sniffer that collect all the packets and running from a separate thread
+ *
+ */
 public class PacketSniffer implements Runnable {
+    private SnifferDashboard dashboard;
 
     private int packetNumber = 0;
 
-    PcapNetworkInterface networkInterface;
-    PcapNetworkInterface.PromiscuousMode promiscuousMode;
-    PcapDumper dumper;
+    private PcapNetworkInterface networkInterface;
+    private PcapNetworkInterface.PromiscuousMode promiscuousMode;
+    private PcapDumper dumper;
     private boolean running = true;
 
 
 
-    private SnifferDashboard dashboard;
-
-
+    /**
+     * This is the constructor to create a PacketSniffer object
+     *
+     * @param dashboard is a reference to the SnifferDashboard which contains everything relating to the GUI
+     * @param networkInterface is the network interface being sniffed on
+     * @param promiscuousMode is the mode the sniffer is in
+     */
     public PacketSniffer(SnifferDashboard dashboard,PcapNetworkInterface networkInterface, PcapNetworkInterface.PromiscuousMode promiscuousMode) {
         this.dashboard = dashboard;
         this.networkInterface = networkInterface;
         this.promiscuousMode = promiscuousMode;
     }
+
+    /**
+     * This is the run method for the thread that writes packets onto the GUI and populates the shared packets list
+     * It also dumps packets to be saved if required
+     *
+     */
     @Override
     public void run() {
-
         try {
             PcapHandle handle = networkInterface.openLive(
                     65536,                             // snaplen
                     promiscuousMode,
                     10                                 // timeout in ms
             );
-
             System.out.println("Started sniffing on " + networkInterface.getName());
             dumper = handle.dumpOpen("temp.pcap");
             while (running) {

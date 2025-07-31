@@ -8,7 +8,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-
+/**
+ * This class is used to contain everything to do with the detail frame which can be activated in the view menu
+ *
+ */
 public class DetailFrame extends JFrame {
 
     DetailedPacketsDisplayScrollPanel packetsDisplayScrollPanel;
@@ -19,7 +22,12 @@ public class DetailFrame extends JFrame {
     DefaultTableModel mainDetailedPacketTable;
     JTable table;
 
-
+    /**
+     * This is the constructor for this class and sets up everything to do with its configuration
+     *
+     * @param dashboard is a reference to a SnifferDashboard object to be able to receive packets and display them
+     *                  in the frame
+     */
     public DetailFrame(SnifferDashboard dashboard) {
         this.setTitle("Detail Viewer");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -57,10 +65,6 @@ public class DetailFrame extends JFrame {
                     dashboard.getDashboardPacketPanelsWrapper().
                             getPacketsDisplayPanel().setSuppressListener(false);
 
-
-
-
-
                     dashboard.setSelectedPacket(dashboard.findPacket(packetNumberSelected));
                     dashboard.getDashboardPacketPanelsWrapper().
                             getPacketInformationPanel().
@@ -77,6 +81,29 @@ public class DetailFrame extends JFrame {
 
 
     }
+
+    //general methods
+    public void addRowToTable(IdentifiedPacket identifiedPacket) {
+
+        mainDetailedPacketTable.addRow(new Object[]{identifiedPacket.getPacketNumber(),
+                identifiedPacket.getSrcIp(),
+                identifiedPacket.getDstIp(),
+                identifiedPacket.getSrcPort(),
+                identifiedPacket.getDstPort(),
+                identifiedPacket.getProtocol(),
+                identifiedPacket.getLowestPacket().getClass().getSimpleName().replace("Packet", ""),
+                identifiedPacket.getPacket().length()});
+
+        //TODO make this so it only does this if the user isn't looking at a packet not sure if possible
+        //setting screen to the bottom
+        JScrollBar verticalBar = packetsDisplayScrollPanel.getVerticalScrollBar();
+        verticalBar.setValue(verticalBar.getMaximum());
+    }
+
+    public void resetMainDetailedPacketTable() {
+        mainDetailedPacketTable.setRowCount(0);
+    }
+
     //getters
     public JTable getTable() {
         return table;
@@ -89,31 +116,4 @@ public class DetailFrame extends JFrame {
     public void setSuppressListener(boolean suppressListener) {
         this.suppressListener = suppressListener;
     }
-
-
-
-
-
-    public void addRowToTable(IdentifiedPacket identifiedPacket) {
-
-        mainDetailedPacketTable.addRow(new Object[]{identifiedPacket.getPacketNumber(),
-                identifiedPacket.getSrcIp(),
-                identifiedPacket.getDstIp(),
-                identifiedPacket.getSrcPort(),
-                identifiedPacket.getDstPort(),
-                identifiedPacket.getProtocol(),
-                identifiedPacket.getLowestPacket().getClass().getSimpleName().replace("Packet", ""),
-                identifiedPacket.getPacket().length()});
-
-
-        //TODO make this so it only does this if the user isn't looking at a packet not sure if possible
-        //setting screen to the bottom
-        JScrollBar verticalBar = packetsDisplayScrollPanel.getVerticalScrollBar();
-        verticalBar.setValue(verticalBar.getMaximum());
-    }
-
-    public void resetMainDetailedPacketTable() {
-        mainDetailedPacketTable.setRowCount(0);
-    }
-
 }

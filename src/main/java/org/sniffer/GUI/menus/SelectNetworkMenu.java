@@ -21,8 +21,8 @@ import java.util.concurrent.TimeoutException;
  *
  */
 public class SelectNetworkMenu extends JMenu {
-
     private SnifferDashboard dashboard;
+
     private ArrayList<JRadioButtonMenuItem> networkItems = new ArrayList<JRadioButtonMenuItem>();
     private ButtonGroup networkGroup = new ButtonGroup();
     private List<PcapNetworkInterface> nif = Pcaps.findAllDevs();
@@ -112,10 +112,7 @@ public class SelectNetworkMenu extends JMenu {
         }
     }
 
-
     public void unselectRadioButtons(){
         networkGroup.clearSelection();
     }
-
-
 }

@@ -15,15 +15,21 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-
+/**
+ * This class is used to hold all functionality (in the GUI) that relates to files
+ *
+ */
 public class FileMenu extends JMenu {
-   private SnifferDashboard dashboard;
+    private SnifferDashboard dashboard;
 
+    private JButton saveButton = new JButton("Save");
+    private JButton openButton = new JButton("Open");
 
-   private JButton saveButton = new JButton("Save");
-   private JButton openButton = new JButton("Open");
-
-
+    /**
+     * This is the constructor for the menu
+     *
+     * @param dashboard is a reference to the SnifferDashboard object allowing access to packet information
+     */
     public FileMenu(SnifferDashboard dashboard) {
         super("File");
         this.dashboard = dashboard;
@@ -55,10 +61,7 @@ public class FileMenu extends JMenu {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-
                     new File("temp.pcap").delete();
-
-
                 }
             }
         });
@@ -127,10 +130,8 @@ public class FileMenu extends JMenu {
                 }
             }
         });
-
         saveButton.setEnabled(false);
         openButton.setEnabled(true);
-
     }
 
     public JButton getSaveButton() {

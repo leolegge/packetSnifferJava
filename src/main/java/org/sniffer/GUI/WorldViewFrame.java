@@ -2,6 +2,10 @@ package org.sniffer.GUI;
 
 import javax.swing.*;
 
+/**
+ * This class is still to be implemented but if implemented will show a map of all connected networks
+ *
+ */
 public class WorldViewFrame extends JFrame {
 
     public WorldViewFrame(SnifferDashboard dashboard) {

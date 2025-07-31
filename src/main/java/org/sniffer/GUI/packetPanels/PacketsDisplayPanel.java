@@ -9,6 +9,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.Timestamp;
 
+/**
+ * This is the main display panel for packets on which packets are displayed to the user
+ *
+ * The scroll panel contained within the class allows for packets  to be added to a table then automatically enable
+ * scrolling capabilities
+ *
+ */
 public class PacketsDisplayPanel extends JPanel {
 
     PacketsDisplayScrollPanel packetsDisplayScrollPanel;
@@ -27,6 +34,11 @@ public class PacketsDisplayPanel extends JPanel {
     DefaultTableModel mainPacketTable;
     JTable table;
 
+    /**
+     * This is the constructor for this panel setting up the GUIs initial state
+     *
+     * @param dashboard is a reference to the SnifferDashboard
+     */
     public PacketsDisplayPanel(SnifferDashboard dashboard) {
         this.dashboard = dashboard;
         this.setLayout(new BorderLayout());
@@ -76,9 +88,6 @@ public class PacketsDisplayPanel extends JPanel {
                         }
                     }
 
-
-
-
                     dashboard.setSelectedPacket(dashboard.findPacket(packetNumberSelected));
                     dashboard.getDashboardPacketPanelsWrapper().
                             getPacketInformationPanel().
@@ -88,24 +97,26 @@ public class PacketsDisplayPanel extends JPanel {
                             getPacketInformationPanel().
                             getPacketBytesPanel().
                             setBytesPage(dashboard.getSelectedPacket().getPacket());
-
-
-
                 }
             }
         });
 
-
-
-
-
         packetsDisplayScrollPanel = new PacketsDisplayScrollPanel(table);
 
         this.add(packetsDisplayScrollPanel, BorderLayout.NORTH);
-
     }
 
+    //general methods
+    public void addRowToDisplayPanel(IdentifiedPacket identifiedPacket) {
+        mainPacketTable.addRow(new Object[] {identifiedPacket.getPacketNumber(),
+                identifiedPacket.getProtocol(), "Filler", identifiedPacket.getPacket().length(), identifiedPacket.getTimestamp()});
+    }
 
+    public void resetTable(){
+        this.mainPacketTable.setRowCount(0);
+    }
+
+    //getters
     public JTable getTable() {
         return table;
     }
@@ -113,21 +124,8 @@ public class PacketsDisplayPanel extends JPanel {
         return supressListener;
     }
 
-
-
+    //setters
     public void setSuppressListener(boolean suppressListener) {
         this.supressListener = suppressListener;
     }
-
-    public void addRowToDisplayPanel(IdentifiedPacket identifiedPacket) {
-        mainPacketTable.addRow(new Object[] {identifiedPacket.getPacketNumber(),
-                identifiedPacket.getProtocol(), "Filler", identifiedPacket.getPacket().length(), identifiedPacket.getTimestamp()});
-
-
-    }
-
-    public void resetTable(){
-        this.mainPacketTable.setRowCount(0);
-    }
-
 }

@@ -10,6 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+
+/**
+ * This class is used to contain the filter buttons and their functionalities
+ *
+ */
 public class FilterButtonPanel extends JPanel {
 
     private SnifferDashboard dashboard;
@@ -17,6 +22,11 @@ public class FilterButtonPanel extends JPanel {
     private final JButton applyFilterButton = new JButton("Apply filter");
     private final JButton clearFilterButton = new JButton("Clear filter");
 
+    /**
+     * This is the constructor to set up the listeners for the buttons as well as construct the panel
+     *
+     * @param dashboard is a reference to the SnifferDashboard which data is filtered from
+     */
     public FilterButtonPanel(SnifferDashboard dashboard) {
         this.dashboard = dashboard;
         this.setLayout(new BorderLayout());
@@ -88,7 +98,6 @@ public class FilterButtonPanel extends JPanel {
                             resetMainDetailedPacketTable();
                 }
 
-                //TODO also reset some other methods here for how packets are filtered
                 dashboard.setQuery(null);
 
                 dashboard.getDashboardPacketPanelsWrapper().getPacketsDisplayPanel().resetTable();
@@ -108,12 +117,11 @@ public class FilterButtonPanel extends JPanel {
                                 addRowToTable(currentPacket);
                     }
                 }
-
-
             }
         });
     }
 
+    //getters
     public JButton getApplyFilterButton() {
         return applyFilterButton;
 

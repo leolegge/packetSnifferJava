@@ -8,6 +8,11 @@ import java.sql.Timestamp;
 //TODO make a function to get the exact protocol of the received packet out of the raw hex bytes only do this for a few
 //TODO as there thousands of different protocols
 
+
+/**
+ * This class is used to store all information about a captured packet
+ *
+ */
 public class IdentifiedPacket {
 
     private final Packet rawPacket;
@@ -21,7 +26,13 @@ public class IdentifiedPacket {
     private String dstPort = "N/A";
 
 
-
+    /**
+     * This is the constructor for the class
+     *
+     * @param rawPacket is the actual captured packet
+     * @param timestamp is the timestamp at which the rawPacket was captured at
+     * @param packetNumber is the number which stores the order in which a captured packet was captured
+     */
     public IdentifiedPacket(Packet rawPacket, Timestamp timestamp, int packetNumber) {
         this.rawPacket = rawPacket;
         this.timestamp = timestamp;
@@ -31,6 +42,11 @@ public class IdentifiedPacket {
 
 
     //general methods
+
+    /**
+     * This class is used to identify the type of packet captured as well as store important values
+     *
+     */
     public void parsePacket() {
         ArpPacket arp = rawPacket.get(ArpPacket.class);
         if (arp != null) {
@@ -78,11 +94,20 @@ public class IdentifiedPacket {
         }
     }
 
+    /**
+     * checks if a packet is likely to be HTTTP
+     * @param data is the rawData from the packet being passed into the function
+     * @return a boolean value which represents if the packet is HTTP or not
+     */
     private boolean isLikelyHttp(byte[] data) {
         String str = new String(data);
         return str.startsWith("GET") || str.startsWith("POST") || str.startsWith("HTTP");
     }
 
+    /**
+     * Used to identify the type of packet at its lowest layer
+     * @return the un-wrapped packet
+     */
     public Packet getLowestPacket() {
         Packet current = rawPacket;
 

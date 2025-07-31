@@ -7,6 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class allows for data to be hidden and then expanded upon a button press
+ *
+ */
 public class ExpandablePanel extends JPanel {
 
     SnifferDashboard dashboard;
@@ -17,6 +21,14 @@ public class ExpandablePanel extends JPanel {
     JTextArea contentArea = new JTextArea();
     boolean expanded = false;
 
+
+    /**
+     * This is the constructor to build an expandable panel
+     *
+     * @param label is the name describing the content that is shown when the panel is expanded
+     * @param content is the content shown upon expansion
+     * @param dashboard is a reference to the SnifferDashboard in order to load packet data into the panel
+     */
     public ExpandablePanel(String label, String content, SnifferDashboard dashboard) {
         this.dashboard = dashboard;
         this.setLayout(new BorderLayout());
@@ -51,7 +63,5 @@ public class ExpandablePanel extends JPanel {
 
             }
         });
-
-
     }
 }

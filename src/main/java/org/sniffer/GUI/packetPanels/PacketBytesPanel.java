@@ -6,12 +6,20 @@ import javax.swing.*;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
 
+/**
+ * This class is used to contain and manage how packet bytes are displayed onto the GUI
+ *
+ */
 public class PacketBytesPanel extends JPanel {
 
     PacketBytesScrollablePanel packetBytesScrollablePanel;
 
     JTextArea bytesArea;
 
+    /**
+     * Constructor for the panel initially it is empty as in the programs initial state no packet is selected
+     *
+     */
     public PacketBytesPanel() {
         this.setLayout(new BorderLayout());
         bytesArea = new JTextArea();
@@ -21,11 +29,13 @@ public class PacketBytesPanel extends JPanel {
         bytesArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
         this.packetBytesScrollablePanel = new PacketBytesScrollablePanel(bytesArea);
         this.add(packetBytesScrollablePanel, BorderLayout.CENTER);
-
-
     }
 
-    //TODO make this correctly display byte data onto the screen
+    /**
+     * This sets the data on the panel which is then added and displayed
+     *
+     * @param packet is the packet whose bytes is to be displayed
+     */
     public void setBytesPage(Packet packet){
         bytesArea.removeAll();
 
@@ -46,6 +56,5 @@ public class PacketBytesPanel extends JPanel {
         }
 
         bytesArea.setText(hexBuilder.toString());
-
     }
 }

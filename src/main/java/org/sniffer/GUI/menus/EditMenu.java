@@ -9,13 +9,17 @@ import java.awt.event.ActionEvent;
  * This class is a JMenu which contains everything a user may want to edit data with
  *
  */
-
 public class EditMenu extends JMenu {
 
     private SnifferDashboard dashboard;
 
     JButton clearPacketsDisplay = new JButton("Clear");
 
+    /**
+     * This is the constructor for the JMenu
+     *
+     * @param dashboard is a reference to the SnifferDashboard object allowing the menu to control the main GUI
+     */
     public EditMenu(SnifferDashboard dashboard) {
         super("Edit");
         this.dashboard = dashboard;
@@ -31,6 +35,4 @@ public class EditMenu extends JMenu {
             }
         });
     }
-
-
 }

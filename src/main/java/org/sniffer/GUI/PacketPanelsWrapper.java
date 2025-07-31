@@ -18,6 +18,11 @@ public class PacketPanelsWrapper extends JPanel {
 
     SnifferDashboard dashboard;
 
+    /**
+     * This is the constructor for the wrapper and sets up all panels in the main area of the GUI
+     *
+     * @param dashboard is a reference to the SnifferDashboard to allow passing of information between panels
+     */
     public PacketPanelsWrapper(SnifferDashboard dashboard) {
         this.dashboard = dashboard;
         packetsDisplayPanel = new PacketsDisplayPanel(dashboard);
@@ -26,9 +31,6 @@ public class PacketPanelsWrapper extends JPanel {
         this.setLayout(new GridLayout(2, 1));
         this.add(packetsDisplayPanel);
         this.add(packetInformationPanel);
-
-
-
     }
 
     //getters
@@ -38,6 +40,4 @@ public class PacketPanelsWrapper extends JPanel {
     public PacketInformationPanel getPacketInformationPanel() {
         return packetInformationPanel;
     }
-
-
 }

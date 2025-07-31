@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This class is used to contain the stop and start buttons for the packet sniffer
+ *
+ */
 public class StartStopSnifferPanel extends JPanel {
 
     private SnifferDashboard dashboard;
@@ -16,7 +20,11 @@ public class StartStopSnifferPanel extends JPanel {
     private final JButton startSnifferButton = new JButton("Start sniffer");
     private final JButton stopSnifferButton = new JButton("Stop sniffer");
 
-
+    /**
+     * This is the constructor to set up the listeners for the buttons as well as their layout
+     *
+     * @param dashboard is used as a reference to allow the buttons to access the PacketSniffer class and start it
+     */
     public StartStopSnifferPanel(SnifferDashboard dashboard) {
         this.setLayout(new BorderLayout());
         this.dashboard = dashboard;

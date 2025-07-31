@@ -7,20 +7,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This class contains all information relating to the payload of a panel and sets up the GUI to display it
+ *
+ */
 public class PayloadPanel extends JPanel {
 
     private PayloadPanelScrollable payloadPanelScrollable;
     private JPanel layersContainer = new JPanel();
 
+    /**
+     * Constructor for this class used to set up initial state of the payload panel
+     *
+     */
     public PayloadPanel() {
         this.setLayout(new BorderLayout());
-        this.setBackground(Color.RED);
         this.payloadPanelScrollable = new PayloadPanelScrollable(layersContainer);
         this.add(payloadPanelScrollable, BorderLayout.CENTER);
         this.layersContainer.setLayout(new BoxLayout(layersContainer, BoxLayout.Y_AXIS));
 
     }
 
+    //general methods
     public void setUpPayloadPanel(Packet packet, SnifferDashboard dashboard) {
 
         layersContainer.removeAll();

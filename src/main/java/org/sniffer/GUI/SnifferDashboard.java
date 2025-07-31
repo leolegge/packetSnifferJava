@@ -38,7 +38,11 @@ public class SnifferDashboard extends JFrame {
     private PcapNetworkInterface networkInterface = null;
 
 
-
+    /**
+     * This is the constructor which builds the main GUI setting up all necessary panels for its initial state
+     *
+     * @throws PcapNativeException when the packet sniffer fails
+     */
     public SnifferDashboard() throws PcapNativeException {
         this.setTitle("Sniffer");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,6 +73,27 @@ public class SnifferDashboard extends JFrame {
 
 
         this.setVisible(true);
+    }
+
+
+    //general methods
+    public void startSniffer() {
+        packetSniffer.setRunning(true);
+        snifferThread.start();
+    }
+
+    public void stopSniffer() {
+        packetSniffer.setRunning(false);
+    }
+
+    public void addSharedPacket(IdentifiedPacket packet) {
+        sharedPacketList.add(packet);
+    }
+
+    public IdentifiedPacket findPacket(int packetNumber){
+        synchronized (sharedPacketList) {
+            return sharedPacketList.get(packetNumber-1);
+        }
     }
 
     //getter
@@ -105,9 +130,6 @@ public class SnifferDashboard extends JFrame {
         return currentQuery;
     }
 
-
-
-
     //setter
     public void setNetworkInterface(PcapNetworkInterface networkInterface) {
         this.networkInterface = networkInterface;
@@ -127,25 +149,5 @@ public class SnifferDashboard extends JFrame {
     }
     public void setQuery(Query query) {
         this.currentQuery = query;
-    }
-
-    //general methods
-    public void startSniffer() {
-        packetSniffer.setRunning(true);
-        snifferThread.start();
-    }
-
-    public void stopSniffer() {
-        packetSniffer.setRunning(false);
-    }
-
-    public void addSharedPacket(IdentifiedPacket packet) {
-        sharedPacketList.add(packet);
-    }
-
-    public IdentifiedPacket findPacket(int packetNumber){
-        synchronized (sharedPacketList) {
-            return sharedPacketList.get(packetNumber-1);
-        }
     }
 }

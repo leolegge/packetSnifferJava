@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
  * This class allows for different parts of the menu to be toggled and un-toggled for a cleaner look
  *
  */
-
 public class ViewMenu extends JMenu {
     private SnifferDashboard dashboard;
     private JButton applicationView = new JButton("Detail view");
@@ -21,6 +20,12 @@ public class ViewMenu extends JMenu {
 
     private DetailFrameAuthenticator detailFrameAuthenticator;
 
+    /**
+     * This is the constructor for the menu and sets up buttons to be able to activate separate windows for
+     * better visibility of packets
+     *
+     * @param dashboard is a reference to the main dashboard in order to load information into new panels
+     */
     public ViewMenu(SnifferDashboard dashboard) {
         super("View");
         this.dashboard = dashboard;

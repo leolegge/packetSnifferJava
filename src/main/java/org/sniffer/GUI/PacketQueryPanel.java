@@ -22,6 +22,12 @@ public class PacketQueryPanel extends JPanel {
     private final FilterButtonPanel filterButtonPanel;
     private final StartStopSnifferPanel startStopSnifferPanel;
 
+    /**
+     * This is the constructor for the Query panel at the top of the program
+     *
+     * @param dashboard is a reference to the SnifferDashboard to allow access to information as well as control
+     *                  over the packet sniffer
+     */
     public PacketQueryPanel(SnifferDashboard dashboard) {
         this.dashboard = dashboard;
         //setting up filter buttons
@@ -40,15 +46,12 @@ public class PacketQueryPanel extends JPanel {
             }
         });
 
-
         //setting up filters buttons
         this.add(filterButtonPanel, BorderLayout.EAST);
 
 
         //setting up start and stop buttons
         this.add(startStopSnifferPanel, BorderLayout.WEST);
-
-
     }
 
     //getters
